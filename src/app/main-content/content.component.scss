@@ -1,0 +1,66 @@
+.products-content {
+  display: inline-flex;
+
+  .product-card {
+    max-width: 400px;
+    height: 470px;
+    margin: 10px;
+
+    .card-header {
+      max-height: 90px;
+
+      .card-header-title {
+        font-size: 16px;
+        font-weight: 590;
+      }
+
+      .card-header-category {
+        font-style: italic;
+      }
+    }
+
+    .card-discount {
+      position: absolute;
+      z-index: 1;
+      top: 100px;
+      left: 20px;
+      height: 30px;
+    }
+
+    .card-image {
+      position: relative;
+      z-index: 0;
+    }
+
+    .card-content {
+      max-height: 40px;
+
+      .card-price {
+        font-weight: 590;
+        font-size: 25px;
+      }
+
+      .x-icon {
+        display: inline-flex;
+      }
+
+      .card-old {
+        font-style: italic;
+
+        .card-old-price {
+          text-decoration: line-through
+        }
+      }
+
+      .card-bottom {
+        align-items: center;
+        margin-top: 10px;
+
+        .spec-image {
+          height: 30px;
+        }
+      }
+
+    }
+  }
+}

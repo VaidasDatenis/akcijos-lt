@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "akcijoslt"
+  },
+  "targets": {
+    "akcijoslt": {
+      "hosting": {
+        "akcijos-lt": [
+          "akcijoslt"
+        ]
+      }
+    }
+  }
+}
