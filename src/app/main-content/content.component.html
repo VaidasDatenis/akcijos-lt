@@ -16,7 +16,8 @@
             <div *ngIf="product.discount" class="card-discount">
               <h3>{{ product.discount }}</h3>
             </div>
-            <img class="card-image" mat-card-image [src]="product.imageUrl" class="img-thumbnail" [alt]="product.title">
+            <img mat-card-image class="card-image img-thumbnail" [ngSrc]="product.imageUrl" width="400" height="300"
+              [alt]="product.title" priority />
             <mat-card-content class="card-content">
               <div class="d-flex justify-content-between">
                 <span class="card-price">{{ product.priceEur }}, {{ product.priceCents }}

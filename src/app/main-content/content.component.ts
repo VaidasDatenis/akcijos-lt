@@ -33,7 +33,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
   }
 
   fireFacade() {
-    this.productsFacade.mapData().subscribe();
+    this.productsFacade.mapData();
   }
 
   productsByCategory(category: string): Observable<Product[]> {

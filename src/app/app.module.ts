@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './main-content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { environment } from 'src/environments/environment';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, ContentComponent],
@@ -30,6 +31,7 @@ import { environment } from 'src/environments/environment';
     FooterComponent,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    NgOptimizedImage,
   ],
   exports: [ContentComponent],
   providers: [],

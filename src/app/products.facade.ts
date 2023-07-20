@@ -26,7 +26,7 @@ export class ProductsFacade {
         products.map((item) => this.categories.add(item.category));
       }
       )
-    );
+    ).subscribe();
   }
 
   getCategories() {
