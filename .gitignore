@@ -38,7 +38,9 @@ testem.log
 /typings
 /environments
 environment.prod.ts
+environment.dev.ts
 environment.ts
+key-values.ts
 
 # System files
 .DS_Store
