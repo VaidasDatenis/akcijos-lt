@@ -2,7 +2,7 @@ import { keys } from "key-values";
 
 export const environment = {
   production: false,
-  firebaseConfig: {
+  firebase: {
     projectId: keys.projectId,
     appId: keys.appId,
     databaseURL: keys.databaseURL,
@@ -11,5 +11,5 @@ export const environment = {
     authDomain: keys.authDomain,
     messagingSenderId: keys.messagingSenderId,
     measurementId: keys.measurementId,
-  },
+  }
 };

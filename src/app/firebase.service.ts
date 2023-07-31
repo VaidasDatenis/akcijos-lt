@@ -1,24 +1,42 @@
 import { Injectable, inject } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { Observable, map } from 'rxjs';
-import { Product } from './product.interface';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import { Observable, Subject, map, of } from 'rxjs';
+import { Product, enumMarketsList } from './product.interface';
+// import { ikiProducts } from 'src/assets/data/iki';
+// import { maximaProducts } from 'src/assets/data/maxima';
+// import { rimiProducts } from 'src/assets/data/rimi';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  // fireStore = inject(AngularFirestore);
-  // fireDatabase = inject(AngularFireDatabase);
+  private firestore = inject(AngularFireDatabase);
+  products$!: Observable<Product[]>;
+  // products$!: any;
+  // products$!: AngularFireObject<Product>;
+  // ikiData = ikiProducts;
+  // maximaData = maximaProducts;
+  // rimiData = rimiProducts;
+  // marketProducts: AngularFirestoreCollection<Product> | undefined;
 
-  private dbPath = '/maxima';
-  productsRef: AngularFirestoreCollection<Product>;
+  constructor() { }
 
-  constructor(private firestore: AngularFirestore) {
-    this.productsRef = this.firestore.collection(this.dbPath);
+  getAllMarketProducts(market: string): Observable<Product[]> {
+    return this.firestore.list<Product>(market).valueChanges();
   }
 
-  getAll(): AngularFirestoreCollection<Product> {
-    return this.productsRef;
-  }
+  // THIS  IS DEMO DATA CALL
+  // getProductsByCategory(marketName: string, category: string): Observable<Product[]> {
+  //   if (marketName === enumMarketsList.MAXIMA) {
+  //     return of(this.maximaData);
+  //   }
+  //   if (marketName === enumMarketsList.IKI) {
+  //     return of(this.ikiData);
+  //   }
+  //   if (marketName === enumMarketsList.RIMI) {
+  //     return of(this.rimiData);
+  //   }
+  //   return of([]);
+  // }
 }

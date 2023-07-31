@@ -117,9 +117,7 @@
           "builder": "@angular/fire:deploy",
           "options": {
             "version": 2,
-            "browserTarget": "akcijos-lt:build:production",
-            "serverTarget": "akcijos-lt:server:production",
-            "prerenderTarget": "akcijos-lt:prerender:production"
+            "browserTarget": "akcijos-lt:build:production"
           }
         }
       }

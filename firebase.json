@@ -1,16 +1,18 @@
 {
-  "hosting": {
-    "target": "akcijoslt",
-    "public": "dist/akcijos-lt",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "frameworksBackend": {
-      "region": "europe-west1"
+  "hosting": [
+    {
+      "target": "akcijos-lt",
+      "public": "dist/akcijos-lt",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "frameworksBackend": {
+        "region": "europe-west1"
+      }
     }
-  },
+  ],
   "rewrites": [
     {
       "source": "**",

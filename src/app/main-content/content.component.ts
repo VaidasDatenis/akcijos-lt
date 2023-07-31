@@ -1,9 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from "@angular/core";
-import { ProductsFacade } from "../products.facade";
-import { Observable, Observer, filter, map, of } from "rxjs";
-import { Product } from "../product.interface";
+import { ChangeDetectionStrategy, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, inject } from "@angular/core";
+import { BehaviorSubject, Observable, Observer, Subject, filter, fromEvent, map, of, switchMap, take, takeUntil } from "rxjs";
+import { Product, listOfMarkets } from "../product.interface";
 import { MatTabChangeEvent } from "@angular/material/tabs";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { FirebaseService } from "../firebase.service";
+import { DOCUMENT, ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-content',
@@ -11,39 +11,80 @@ import { AngularFireDatabase } from "@angular/fire/compat/database";
   styleUrls: ['content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContentComponent implements OnInit, AfterViewInit {
-  productsFacade = inject(ProductsFacade);
-  categoryTabs$: Observable<Set<string>>;
+export class ContentComponent implements OnInit, OnDestroy {
+  firestoreService = inject(FirebaseService);
+  private readonly document = inject(DOCUMENT);
+  private readonly viewport = inject(ViewportScroller);
+  products$ = new BehaviorSubject<Product[]>([{
+    category: '',
+    imageUrl: '',
+    title: '',
+  }]);
+  onDestroy$ = new Subject<void>();
+  asyncTabs = new BehaviorSubject<Set<string>>(new Set<string>);
+  asyncCategories = new Set<string>();
+
+  marketsList = listOfMarkets;
+
+  @ViewChild('marketTabGroup') marketTabGroup!: { selectedIndex: number; };
   @ViewChild('tabGroup') tabGroup!: { selectedIndex: number; };
 
-  constructor(private fireDatabase: AngularFireDatabase) {
-    this.categoryTabs$ = new Observable((observer: Observer<Set<string>>) => {
-      setTimeout(() => {
-        observer.next(this.productsFacade.getCategories());
-      }, 1000);
-    });
-  }
-
-  ngOnInit(): void {
-    this.fireFacade();
-  }
-
-  ngAfterViewInit() {
-    // console.log(this.tabGroup.selectedIndex);
-  }
-
-  fireFacade() {
-    this.productsFacade.mapData();
-  }
-
-  productsByCategory(category: string): Observable<Product[]> {
-    return this.productsFacade.getProductsByCategory(category);
-  }
-
-  productsList$ = this.productsFacade.parsedProducts$.pipe(
-    filter((products) => !!products),
-    map((products) => products)
+  readonly showScroll$: Observable<boolean> = fromEvent(
+    this.document,
+    'scroll'
+  ).pipe(
+    map(() => this.viewport.getScrollPosition()?.[1] > 0)
   );
 
+  constructor() { }
+
+  ngOnInit() {
+    this.getMarketTab('maxima');
+    // this.marketsList$.pipe(
+    //   takeUntil(this.onDestroy$),
+    //   filter((markets) => !!markets),
+    //   map((markets) => {
+    //     return markets.map((market) => {
+    //       this.asyncCategories.clear();
+    //       return this.getMarketTab(market.name);
+    //     })
+    //   })
+    // ).subscribe();
+  }
+
+  getMarketTab(marketName: string) {
+    return this.firestoreService.getAllMarketProducts(marketName).pipe(
+      map((products) => {
+        console.log(products);
+        this.products$.next(products);
+        return products.filter((product) => {
+          this.asyncCategories.add(product.category);
+          return product;
+        })
+      })
+    ).subscribe();
+  }
+
+  onScrollToTop(): void {
+    this.viewport.scrollToPosition([0, 0]);
+  }
+
+  productsByCategory(category: string) {
+    return this.products$.pipe(
+      map((products) => products.filter((product) => product.category === category))
+    );
+  }
+
+  marketTabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    console.log(tabChangeEvent);
+    this.asyncCategories.clear();
+    this.getMarketTab(tabChangeEvent.tab.textLabel);
+  }
+
   tabChanged(tabChangeEvent: MatTabChangeEvent): void { }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 }
