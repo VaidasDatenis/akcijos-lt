@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, inject } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, inject } from "@angular/core";
 import { BehaviorSubject, Observable, Observer, Subject, filter, fromEvent, map, of, switchMap, take, takeUntil } from "rxjs";
 import { Product, listOfMarkets } from "../product.interface";
 import { MatTabChangeEvent } from "@angular/material/tabs";
@@ -36,20 +36,12 @@ export class ContentComponent implements OnInit, OnDestroy {
     map(() => this.viewport.getScrollPosition()?.[1] > 0)
   );
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getMarketTab('maxima');
-    // this.marketsList$.pipe(
-    //   takeUntil(this.onDestroy$),
-    //   filter((markets) => !!markets),
-    //   map((markets) => {
-    //     return markets.map((market) => {
-    //       this.asyncCategories.clear();
-    //       return this.getMarketTab(market.name);
-    //     })
-    //   })
-    // ).subscribe();
+    this.cdr.detectChanges();
+
   }
 
   getMarketTab(marketName: string) {

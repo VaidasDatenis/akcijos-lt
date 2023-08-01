@@ -1,0 +1,20 @@
+<div *ngIf="specImage.market === enumMarketsList.MAXIMA">
+  <div *ngIf="specImage.spec === 'mobile'">
+    <img class="spec-image" mat-card-image src="../../assets/images/programele.png" alt="Tik su programėle" />
+  </div>
+  <div *ngIf="specImage.spec === 'card'">
+    <img class="spec-image" mat-card-image src="../../assets/images/aciu.png" alt="Su AČIŪ kortele" />
+  </div>
+</div>
+<div *ngIf="specImage.market === enumMarketsList.IKI">
+  <div *ngIf="specImage.spec === 'mobile'"></div>
+  <div *ngIf="specImage.spec === 'card'">
+    <img class="spec-image" mat-card-image src="../../assets/images/iki-card.png" alt="Su RIMI kortele" />
+  </div>
+</div>
+<div *ngIf="specImage.market === enumMarketsList.RIMI">
+  <div *ngIf="specImage.spec === 'mobile'"></div>
+  <div *ngIf="specImage.spec === 'card'">
+    <img class="spec-image" mat-card-image src="../../assets/images/rimi-card.png" alt="Su IKI kortele" />
+  </div>
+</div>

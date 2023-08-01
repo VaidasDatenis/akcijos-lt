@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,16 +14,14 @@ import { ContentComponent } from './main-content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
 import { ScrollComponent } from './scroll/scroll.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { CardComponent } from './main-content/card/card.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
-  declarations: [AppComponent, ContentComponent, CardComponent],
+  declarations: [AppComponent, ContentComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -34,13 +32,13 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     BrowserAnimationsModule,
     HeaderComponent,
     FooterComponent,
-    // CardComponent,
+    CardComponent,
     NgOptimizedImage,
     ScrollComponent,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
-  exports: [ContentComponent, CardComponent],
+  exports: [ContentComponent],
   providers: [provideImgixLoader('https://rimibaltic-res.cloudinary.com/image/upload/b_white,c_fit,f_auto,h_216,q_auto,w_216/d_ecommerce:backend-fallback.png/'), ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })

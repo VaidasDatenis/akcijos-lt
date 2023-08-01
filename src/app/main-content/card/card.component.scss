@@ -26,7 +26,15 @@
 
   .card-image {
     position: relative;
+    width: 400px;
+    height: 300px;
     z-index: 0;
+
+    img {
+      aspect-ratio: 12/9;
+      object-fit: cover;
+      width: 100%;
+    }
   }
 
   .card-content {
@@ -52,10 +60,6 @@
     .card-bottom {
       align-items: center;
       margin-top: 10px;
-
-      .spec-image {
-        height: 30px;
-      }
     }
   }
 }
