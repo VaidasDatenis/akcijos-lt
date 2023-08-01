@@ -45,6 +45,7 @@
                   "with": "src/environments/environment.ts"
                 }
               ],
+              "optimization": false,
               "budgets": [
                 {
                   "type": "initial",

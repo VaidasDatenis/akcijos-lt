@@ -3,17 +3,10 @@
     "default": "akcijoslt-8862e"
   },
   "targets": {
-    "akcijoslt": {
-      "hosting": {
-        "akcijos-lt": [
-          "akcijoslt"
-        ]
-      }
-    },
     "akcijoslt-8862e": {
       "hosting": {
-        "akcijos-lt": [
-          "akcijos-lt"
+        "akcijoslt-8862e": [
+          "akcijoslt-8862e"
         ]
       }
     }
