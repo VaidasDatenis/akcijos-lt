@@ -1,14 +1,32 @@
 <mat-card class="product-card">
   <mat-card-header class="card-header">
-    <mat-card-title class="card-header-title">{{ product.title }}</mat-card-title>
-    <mat-card-subtitle class="card-header-category">{{ product.category }}</mat-card-subtitle>
-    <mat-card-subtitle class="card-header-category">{{ product.description }}</mat-card-subtitle>
+    <mat-card-title
+      class="card-header-title"
+      [matTooltip]="product.title"
+      matTooltipPosition="above"
+      >{{ product.title }}</mat-card-title
+    >
+    <mat-card-subtitle class="card-header-category">
+      <div *ngIf="product.category; else noCategoty">
+        {{ product.category }}
+      </div>
+      <ng-template #noCategoty>&nbsp;</ng-template>
+    </mat-card-subtitle>
+    <mat-card-subtitle class="card-header-category">
+      <div *ngIf="product.description; else noDescription">
+        {{ product.description }}
+      </div>
+      <ng-template #noDescription>&nbsp;</ng-template>
+    </mat-card-subtitle>
   </mat-card-header>
   <div
     *ngIf="product.discount"
     class="card-discount"
   >
     <h3>{{ product.discount }}</h3>
+  </div>
+  <div class="card-cart">
+    <button class="card-cart-button">+</button>
   </div>
   <div class="card-image">
     <img
