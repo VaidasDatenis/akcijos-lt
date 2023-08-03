@@ -1,23 +1,40 @@
-<app-scroll *ngIf="showScroll$ | async" (scrollToTop)="onScrollToTop()"></app-scroll>
-<mat-tab-group #marketTabGroup (selectedTabChange)="marketTabChanged($event)" [selectedIndex]="0">
-  <mat-tab *ngFor="let market of marketsList" [label]="market.name">
-    <ng-template mat-tab-label>{{market.label}}</ng-template>
+<app-scroll
+  *ngIf="showScroll$ | async"
+  (scrollToTop)="onScrollToTop()"
+></app-scroll>
+<mat-tab-group
+  #marketTabGroup
+  (selectedTabChange)="marketTabChanged($event)"
+  [selectedIndex]="0"
+>
+  <mat-tab
+    *ngFor="let market of marketsList"
+    [label]="market.name"
+  >
+    <ng-template mat-tab-label>{{ market.label }}</ng-template>
     <ng-template matTabContent>
-      <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)" [selectedIndex]="0">
+      <mat-tab-group
+        #tabGroup
+        (selectedTabChange)="tabChanged($event)"
+        [selectedIndex]="0"
+      >
         <ng-container *ngIf="!asyncCategories">
           <div class="d-flex justify-content-center">
             <mat-spinner [diameter]="30"></mat-spinner>
           </div>
         </ng-container>
         <mat-tab *ngFor="let category of asyncCategories">
-          <ng-template mat-tab-label>{{category}}</ng-template>
+          <ng-template mat-tab-label>{{ category }}</ng-template>
           <ng-template matTabContent>
             <ng-container *ngIf="!productsByCategory(category)">
               <div class="d-flex justify-content-center">
                 <mat-spinner [diameter]="30"></mat-spinner>
               </div>
             </ng-container>
-            <div class="products-content" *ngFor="let product of productsByCategory(category) | async">
+            <div
+              class="products-content"
+              *ngFor="let product of productsByCategory(category) | async"
+            >
               <app-card [product]="product"></app-card>
             </div>
           </ng-template>

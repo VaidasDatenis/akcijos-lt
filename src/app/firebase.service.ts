@@ -20,7 +20,7 @@ export class FirebaseService {
   // rimiData = rimiProducts;
   // marketProducts: AngularFirestoreCollection<Product> | undefined;
 
-  constructor() { }
+  constructor() {}
 
   getAllMarketProducts(market: string): Observable<Product[]> {
     return this.firestore.list<Product>(market).valueChanges();

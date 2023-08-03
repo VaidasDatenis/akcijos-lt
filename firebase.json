@@ -2,11 +2,7 @@
   "hosting": {
     "target": "akcijoslt-8862e",
     "public": "dist/akcijos-lt",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "frameworksBackend": {
       "region": "europe-west1"
     }

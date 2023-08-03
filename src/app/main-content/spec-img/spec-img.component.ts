@@ -1,6 +1,6 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { enumMarketsList } from "src/app/product.interface";
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { enumMarketsList } from 'src/app/product.interface';
 
 @Component({
   selector: 'app-spec-img',

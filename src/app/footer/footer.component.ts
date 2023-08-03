@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { Component } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +8,4 @@ import { MatToolbarModule } from "@angular/material/toolbar";
   standalone: true,
   imports: [MatToolbarModule],
 })
-export class FooterComponent { }
+export class FooterComponent {}

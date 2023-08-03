@@ -4,28 +4,47 @@
     <mat-card-subtitle class="card-header-category">{{ product.category }}</mat-card-subtitle>
     <mat-card-subtitle class="card-header-category">{{ product.description }}</mat-card-subtitle>
   </mat-card-header>
-  <div *ngIf="product.discount" class="card-discount">
+  <div
+    *ngIf="product.discount"
+    class="card-discount"
+  >
     <h3>{{ product.discount }}</h3>
   </div>
   <div class="card-image">
-    <img mat-card-image class="img-thumbnail" [src]="product.imageUrl" [alt]="product.title" />
+    <img
+      mat-card-image
+      class="img-thumbnail"
+      [src]="product.imageUrl"
+      [alt]="product.title"
+    />
   </div>
   <mat-card-content class="card-content">
     <div class="d-flex justify-content-between">
-      <span class="card-price">{{ product.priceEur }}, {{ product.priceCents }}
-        eur.</span>
+      <span class="card-price">{{ product.priceEur }}, {{ product.priceCents }} eur.</span>
       <span class="mt-2">
         {{ product.dateTo }}
-        <span class="x-icons" *ngIf="product.xIcons">
-          <div class="d-inline" *ngFor="let item of [].constructor( product.xIcons ); let i = index">
-            <img mat-card-image src="../../assets/images/x-icon.png">
+        <span
+          class="x-icons"
+          *ngIf="product.xIcons"
+        >
+          <div
+            class="d-inline"
+            *ngFor="let item of [].constructor(product.xIcons); let i = index"
+          >
+            <img
+              mat-card-image
+              src="../../assets/images/x-icon.png"
+            />
           </div>
-        </span>
-      </span><br />
+        </span> </span
+      ><br />
     </div>
     <div class="card-bottom d-flex justify-content-between">
-      <span *ngIf="product.oldPrice" class="card-old">Sena kaina <span class="card-old-price">{{
-          product.oldPrice }}</span></span>
+      <span
+        *ngIf="product.oldPrice"
+        class="card-old"
+        >Sena kaina <span class="card-old-price">{{ product.oldPrice }}</span></span
+      >
       <span *ngIf="product.specImg">
         <app-spec-img [specImage]="product.specImg"></app-spec-img>
       </span>

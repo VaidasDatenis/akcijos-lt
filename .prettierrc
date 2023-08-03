@@ -4,8 +4,11 @@
   "singleQuote": true,
   "semi": true,
   "bracketSpacing": true,
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "trailingComma": "es5",
-  "bracketSameLine": true,
-  "printWidth": 120
+  "bracketSameLine": false,
+  "printWidth": 120,
+  "jsxSingleQuote": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "singleAttributePerLine": true
 }

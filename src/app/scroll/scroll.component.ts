@@ -10,10 +10,9 @@ const MATERIAL_MODULES = [MatButtonModule, MatIconModule];
   selector: 'app-scroll',
   templateUrl: './scroll.component.html',
   styleUrls: ['./scroll.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollComponent {
-
   @Output() scrollToTop = new EventEmitter<void>();
 
   onScrollToTop(): void {

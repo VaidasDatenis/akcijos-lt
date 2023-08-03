@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
@@ -8,4 +8,4 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   standalone: true,
   imports: [MatToolbarModule],
 })
-export class HeaderComponent { }
+export class HeaderComponent {}
