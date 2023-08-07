@@ -5,8 +5,12 @@
 
   .card-header {
     max-height: 90px;
+    overflow: hidden;
 
     .card-header-title {
+      text-overflow: ellipsis;  /* enables ellipsis */
+      white-space: nowrap;      /* keeps the text in a single line */
+      overflow: hidden;         /* keeps the element from overflowing its parent */
       font-size: 16px;
       font-weight: 590;
     }
@@ -22,6 +26,56 @@
     top: 100px;
     left: 20px;
     height: 30px;
+    color: rgb(235, 24, 24);
+  }
+
+  .card-cart {
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    right: 15px;
+
+    .card-cart-button {
+      cursor: pointer;
+      height: 50px;
+      width: 50px;
+      color: rgb(0, 0, 0);
+      border: 0.8px solid black;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+      transition-duration: 0.4s;
+      -webkit-transition-duration: 0.4s; /* Safari */
+
+      &:hover {
+        transition-duration: 0.1s;
+        background-color: #e7e6e6;
+      }
+
+      ::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 4em;
+        top: 1px;
+        right: 1px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.5s;
+        box-shadow: 0 0 10px 40px white;
+      }
+
+      &:active {
+        box-shadow: 0 0 0 0 rgb(128, 128, 128);
+        position: absolute;
+        border-radius: 4em;
+        top: 1px;
+        right: 1px;
+        opacity: 1;
+        transition: 0s;
+      }
+    }
   }
 
   .card-image {
@@ -41,8 +95,13 @@
     max-height: 40px;
 
     .card-price {
+      margin-right: 3px;
       font-weight: 590;
       font-size: 25px;
+    }
+
+    .card-price-termination {
+      margin-left: auto;
     }
 
     .x-icon {
@@ -55,6 +114,10 @@
       .card-old-price {
         text-decoration: line-through;
       }
+    }
+
+    .card-spec-img {
+      margin-left: auto;
     }
 
     .card-bottom {

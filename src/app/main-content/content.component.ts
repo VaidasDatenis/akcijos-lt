@@ -2,30 +2,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild,
   inject,
 } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  Observer,
-  Subject,
-  filter,
-  fromEvent,
-  map,
-  of,
-  switchMap,
-  take,
-  takeUntil,
-} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, fromEvent, map } from 'rxjs';
 import { Product, listOfMarkets } from '../product.interface';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FirebaseService } from '../firebase.service';
 import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { transformPrices } from '../utils';
+import { AddToCartService } from '../add-to-cart.service';
 
 @Component({
   selector: 'app-content',
@@ -35,8 +23,10 @@ import { DOCUMENT, ViewportScroller } from '@angular/common';
 })
 export class ContentComponent implements OnInit, OnDestroy {
   firestoreService = inject(FirebaseService);
+  cartService = inject(AddToCartService);
   private readonly document = inject(DOCUMENT);
   private readonly viewport = inject(ViewportScroller);
+  transformPrices = transformPrices;
   products$ = new BehaviorSubject<Product[]>([
     {
       category: '',
@@ -47,7 +37,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject<void>();
   asyncTabs = new BehaviorSubject<Set<string>>(new Set<string>());
   asyncCategories = new Set<string>();
-
+  marketName = 'maxima';
   marketsList = listOfMarkets;
 
   @ViewChild('marketTabGroup') marketTabGroup!: { selectedIndex: number };
@@ -61,7 +51,18 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getMarketTab('maxima');
+    this.cartService.getOldProducts();
     this.cdr.detectChanges();
+  }
+
+  getAddItemEmitter(product: Product, index: number) {
+    const { priceEur, priceCents } = product;
+    const mappedProduct = {
+      ...product,
+      market: this.marketName,
+      price: this.transformPrices(priceEur, priceCents),
+    };
+    this.cartService.addCartItem(mappedProduct);
   }
 
   getMarketTab(marketName: string) {
@@ -69,7 +70,6 @@ export class ContentComponent implements OnInit, OnDestroy {
       .getAllMarketProducts(marketName)
       .pipe(
         map((products) => {
-          console.log(products);
           this.products$.next(products);
           return products.filter((product) => {
             this.asyncCategories.add(product.category);
@@ -89,8 +89,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   marketTabChanged(tabChangeEvent: MatTabChangeEvent): void {
-    console.log(tabChangeEvent);
     this.asyncCategories.clear();
+    this.marketName = tabChangeEvent.tab.textLabel;
     this.getMarketTab(tabChangeEvent.tab.textLabel);
   }
 
