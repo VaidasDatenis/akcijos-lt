@@ -16,6 +16,7 @@ export interface Product {
 }
 
 export interface CartProduct {
+  market: string;
   category: string;
   imageUrl: string;
   title: string;

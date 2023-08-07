@@ -1,21 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { CartProduct, Product } from './product.interface';
+import { BehaviorSubject, Subject, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddToCartService {
-  // https://stackblitz.com/edit/angular-simple-rxjs-shopping-cart-example-bz7y9d?file=src%2Ftheme.scss,src%2Fapp%2Fshopping-cart.service.ts
   cart: CartProduct[] = [];
-  // count: WritableSignal<number> = signal(0);
+  counterCart$ = new BehaviorSubject<number>(0);
 
   addCartItem(item: CartProduct) {
-    // this.count.mutate()
-    // localStorage.removeItem('cart-products');
-    // localStorage.setItem('cart-products', JSON.stringify(this.cart));
+    if (!item) {
+      return;
+    }
+    this.cart.push(item);
+    console.log(this.cart.length);
+    this.counterCart$.next(this.cart.length);
+    localStorage.setItem('cart-products', JSON.stringify(this.cart));
   }
 
-  getProducts() {
-    return this.cart;
+  getOldProducts() {
+    // see if any old items left after refresh
+    const oldCartItems: CartProduct[] = JSON.parse(localStorage.getItem('cart-products') || 'null');
+    if (oldCartItems) {
+      for (let item of oldCartItems) this.cart.push(item);
+    }
+  }
+
+  clearCart() {
+    localStorage.removeItem('cart-products');
+    this.cart = [];
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddToCartService } from '../add-to-cart.service';
@@ -19,19 +19,13 @@ import { Store, select } from '@ngrx/store';
 export class HeaderComponent {
   cartService = inject(AddToCartService);
   dialog = inject(MatDialog);
-  store = inject(Store<{ count: number }>);
-  count$: Observable<number>;
-  cartProducts = this.cartService.getProducts();
 
-  constructor() {
-    this.count$ = this.store.pipe(select('count'));
-  }
+  items$ = this.cartService.counterCart$.pipe();
 
   checkout(): void {
     this.dialog.open(CheckoutDialog, {
-      data: { state: this.cartProducts },
-      height: '400px',
-      width: '600px',
+      height: '800px',
+      width: '800px',
     });
   }
 }

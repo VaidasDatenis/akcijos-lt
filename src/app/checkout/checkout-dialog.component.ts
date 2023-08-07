@@ -17,9 +17,24 @@ import { CartProduct } from '../product.interface';
 })
 export class CheckoutDialog {
   cartService = inject(AddToCartService);
-  products: CartProduct[] = [];
+  products = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.products = this.cartService.getProducts();
+    this.getFromStorage();
+  }
+
+  getFromStorage() {
+    const initProducts: [] = JSON.parse(localStorage.getItem('cart-products') || 'null');
+    initProducts.sort();
+    const counts = {};
+    initProducts.forEach((x: CartProduct) => {
+      console.log(x);
+      // counts?[x] = (counts?[x?.title] || 0) + 1;
+    });
+    console.log(counts);
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
   }
 }

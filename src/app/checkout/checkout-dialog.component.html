@@ -1,6 +1,9 @@
 <h3>Vezimelis</h3>
-<ng-container>
-  <ng-template *ngFor="let item of products">
-    {{ item | json }}
-  </ng-template>
-</ng-container>
+<!-- <div *ngFor="let item of getFromStorage()">
+  <h3>
+    {{ item?.market }}
+  </h3>
+  {{ item?.title }}
+</div> -->
+
+<button (click)="clearCart()">Valyti viską</button>
