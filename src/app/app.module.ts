@@ -20,10 +20,14 @@ import { CardComponent } from './main-content/card/card.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter.reducer';
+
 @NgModule({
   declarations: [AppComponent, ContentComponent],
   imports: [
     BrowserModule,
+    StoreModule.forRoot({ count: counterReducer }),
     HttpClientModule,
     AppRoutingModule,
     MatTabsModule,

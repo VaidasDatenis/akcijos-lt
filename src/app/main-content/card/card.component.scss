@@ -95,8 +95,13 @@
     max-height: 40px;
 
     .card-price {
+      margin-right: 3px;
       font-weight: 590;
       font-size: 25px;
+    }
+
+    .card-price-termination {
+      margin-left: auto;
     }
 
     .x-icon {
@@ -109,6 +114,10 @@
       .card-old-price {
         text-decoration: line-through;
       }
+    }
+
+    .card-spec-img {
+      margin-left: auto;
     }
 
     .card-bottom {

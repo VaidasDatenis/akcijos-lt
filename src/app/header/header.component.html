@@ -2,13 +2,16 @@
   <span class="header-title">Akcija - LT</span>
   <span class="header-description"> Planuok savo apsipirkimus!</span>
   <div class="header-button-container">
-    <button class="header-cart-button">
+    <button
+      class="header-cart-button"
+      (click)="checkout()"
+    >
       <img
         src="../../assets/images/shopping-cart.png"
         height="20px"
         alt=""
       />
-      <span class="cart-button-title">CART</span>
+      <span class="cart-button-title">Vežimėlis {{ count$ | async }} </span>
     </button>
   </div>
 </mat-toolbar>

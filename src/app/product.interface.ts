@@ -15,6 +15,23 @@ export interface Product {
   description?: string;
 }
 
+export interface CartProduct {
+  category: string;
+  imageUrl: string;
+  title: string;
+  price?: string;
+  // oldPrice?: string;
+  dateTo?: string;
+  discount?: string;
+  // xIcons?: number;
+  // specImg?: {
+  //   market?: string;
+  //   spec?: string;
+  // };
+  // description?: string;
+  remove?: boolean;
+}
+
 export enum enumMarketsList {
   MAXIMA = 'maxima',
   IKI = 'iki',

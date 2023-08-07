@@ -69,7 +69,6 @@ export class ContentComponent implements OnInit, OnDestroy {
       .getAllMarketProducts(marketName)
       .pipe(
         map((products) => {
-          console.log(products);
           this.products$.next(products);
           return products.filter((product) => {
             this.asyncCategories.add(product.category);
