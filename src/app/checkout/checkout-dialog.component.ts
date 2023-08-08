@@ -28,7 +28,7 @@ export class CheckoutDialog {
 
   getFromStorage(): CartProduct[] {
     const products: CartProduct[] = JSON.parse(localStorage.getItem('cart-products') || 'null');
-    this.totalCartValue = products.reduce((acc, cur) => acc + Number(cur.price), 0);
+    this.totalCartValue = products?.reduce((acc, cur) => acc + Number(cur.price), 0);
     return products;
   }
 

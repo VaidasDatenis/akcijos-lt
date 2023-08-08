@@ -34,7 +34,7 @@
 <!-- footer -->
 <mat-dialog-actions class="dialog-footer">
   <mat-toolbar>
-    <span class="cart-value">Krepšelio vertė:&emsp;{{ totalCartValue }}&nbsp;€</span>
+    <span class="cart-value">Krepšelio vertė:&emsp;{{ totalCartValue || '0' }}&nbsp;€</span>
     <button
       class="clean-button"
       mat-fab
