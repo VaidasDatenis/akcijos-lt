@@ -73,6 +73,7 @@ export class ContentComponent implements OnInit, OnDestroy {
           this.products$.next(products);
           return products.filter((product) => {
             this.asyncCategories.add(product.category);
+            this.cdr.detectChanges();
             return product;
           });
         })

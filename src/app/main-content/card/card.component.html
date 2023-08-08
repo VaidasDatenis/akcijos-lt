@@ -42,9 +42,9 @@
   </div>
   <mat-card-content class="card-content">
     <div class="d-flex">
-      <span class="card-price">{{ transformPrices(product.priceEur, product.priceCents) }}</span>
+      <span class="card-price">{{ transformPrices(product.priceEur, product.priceCents) }} €</span>
       <span class="card-price-termination mt-2">
-        {{ transformDateTo(product.dateTo) }}€
+        {{ transformDateTo(product.dateTo) }}
         <span
           class="x-icons"
           *ngIf="product.xIcons"

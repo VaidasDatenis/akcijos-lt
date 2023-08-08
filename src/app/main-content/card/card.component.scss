@@ -1,10 +1,10 @@
 .product-card {
-  max-width: 400px;
+  width: 400px;
   height: 470px;
   margin: 10px;
 
   .card-header {
-    max-height: 90px;
+    height: 90px;
     overflow: hidden;
 
     .card-header-title {
@@ -92,7 +92,7 @@
   }
 
   .card-content {
-    max-height: 40px;
+    height: 40px;
 
     .card-price {
       margin-right: 3px;
@@ -123,6 +123,24 @@
     .card-bottom {
       align-items: center;
       margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: 388px;
+    margin: 0.5% 0 0.5% 0;
+    
+    .card-image {
+      position: relative;
+      width: 388px; 
+      
+      img {
+        aspect-ratio: 11/8;
+        object-fit: cover;
+        width: 100%;
+      }
     }
   }
 }

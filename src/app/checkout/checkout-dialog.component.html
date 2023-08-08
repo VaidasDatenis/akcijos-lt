@@ -1,9 +1,58 @@
-<h3>Vezimelis</h3>
-<!-- <div *ngFor="let item of getFromStorage()">
-  <h3>
-    {{ item?.market }}
-  </h3>
-  {{ item?.title }}
-</div> -->
-
-<button (click)="clearCart()">Valyti viską</button>
+<!-- header -->
+<mat-dialog-actions>
+  <mat-toolbar
+    ><h4 class="cart-header">Vežimėlis</h4
+    ><mat-icon
+      class="header-icon"
+      fontIcon="shopping_cart"
+    ></mat-icon
+  ></mat-toolbar>
+</mat-dialog-actions>
+<!-- content -->
+<mat-dialog-content class="dialog-content">
+  <div
+    *ngFor="let product of getFromStorage()"
+    class="cart-product-container"
+  >
+    <!-- <h4 *ngIf="product.market === enumMarketsList.MAXIMA">Maxima</h4> -->
+    <div class="image-conntent">
+      <img
+        mat-card-image
+        class="img-thumbnail"
+        [src]="product.imageUrl"
+        [alt]="product.title"
+      />
+    </div>
+    <div class="product-details">
+      <p>{{ product.title }}</p>
+      <p>{{ product.category }}</p>
+      <p>{{ product.dateTo }}</p>
+      <p>{{ product.price }} €</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<!-- footer -->
+<mat-dialog-actions class="dialog-footer">
+  <mat-toolbar>
+    <span class="cart-value">Krepšelio vertė:&emsp;{{ totalCartValue }}&nbsp;€</span>
+    <button
+      class="clean-button"
+      mat-fab
+      extended
+      color="accent"
+      (click)="clearCart()"
+    >
+      <mat-icon fontIcon="delete"></mat-icon>
+      Valyti viską
+    </button>
+    <button
+      mat-fab
+      extended
+      mat-dialog-close
+      color="default"
+    >
+      <mat-icon fontIcon="close"></mat-icon>
+      Uždaryti
+    </button>
+  </mat-toolbar>
+</mat-dialog-actions>
