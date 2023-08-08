@@ -1,37 +1,35 @@
-import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { AddToCartService } from '../add-to-cart.service';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { CartProduct } from '../product.interface';
+import { CartProduct, enumMarketsList } from '../product.interface';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   standalone: true,
   selector: 'checkout-dialog',
   templateUrl: './checkout-dialog.component.html',
-  imports: [CommonModule, MatCardModule, MatIconModule, MatDialogModule],
+  styleUrls: ['checkout-dialog.component.scss'],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule, MatToolbarModule],
   providers: [AddToCartService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutDialog {
   cartService = inject(AddToCartService);
-  products = [];
+  enumMarketsList = enumMarketsList;
+  totalCartValue!: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor() {
     this.getFromStorage();
   }
 
-  getFromStorage() {
-    const initProducts: [] = JSON.parse(localStorage.getItem('cart-products') || 'null');
-    initProducts.sort();
-    const counts = {};
-    initProducts.forEach((x: CartProduct) => {
-      console.log(x);
-      // counts?[x] = (counts?[x?.title] || 0) + 1;
-    });
-    console.log(counts);
+  getFromStorage(): CartProduct[] {
+    const products: CartProduct[] = JSON.parse(localStorage.getItem('cart-products') || 'null');
+    this.totalCartValue = products.reduce((acc, cur) => acc + Number(cur.price), 0);
+    return products;
   }
 
   clearCart() {

@@ -10,39 +10,13 @@
 .header-button-container {
   margin-left: auto;
   margin-right: 10%;
-  align-items: center;
-  justify-content: center;
-
-  .header-cart-button {
-    height: 35px;
-    background-color: #b8b8b8;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 12px;
-
-    img {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    .cart-button-title{
-      padding-left: 10px;
-      padding-right: 10px;
-      margin-right: 10px;
-    }
-  }
 }
 
 @media (max-width: 480px) {
-  .header-cart-button {
-    border-radius: 50px;
-
-    .cart-button-title {
-      display: none;
-    }
+  .header-description {
+    display: none;
+  }
+  .cart-button-title {
+    display: none;
   }
 }

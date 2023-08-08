@@ -3,15 +3,15 @@
   <span class="header-description"> Planuok savo apsipirkimus!</span>
   <div class="header-button-container">
     <button
-      class="header-cart-button"
-      (click)="checkout()"
+      mat-fab
+      extended
+      color="primary"
+      (click)="openCartDialog()"
     >
-      <img
-        src="../../assets/images/shopping-cart.png"
-        height="20px"
-        alt=""
-      />
-      <span class="cart-button-title">Vežimėlis {{ items$ | async }} </span>
+      <mat-icon fontIcon="shopping_cart"></mat-icon>
+      <span class="cart-button-title">Vežimėlis</span>
+      <!-- {{ items$ | async }}
+      {{ cartService.counterCartSignal() }} -->
     </button>
   </div>
 </mat-toolbar>

@@ -5,3 +5,9 @@
     display: inline-flex;
   }
 }
+
+@media (max-width: 480px) {
+  .main-content {
+    margin: 0;
+  }
+}
