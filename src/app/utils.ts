@@ -5,5 +5,8 @@ export const transformPrices = (euroValue: string | undefined, centValue: string
   let newCents = centValue?.replaceAll('€/vnt.', '');
   let newCents2 = newCents?.replaceAll('€/kg', '');
   let newCents3 = newCents2?.replaceAll('€', '').replace(/\s/g, '');
+  if (newCents3 === undefined) {
+    return `${euroValue}`;
+  }
   return `${euroValue}.${newCents3}`;
 };

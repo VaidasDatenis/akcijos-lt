@@ -1,4 +1,5 @@
 export interface Product {
+  id?: string;
   category: string;
   imageUrl: string;
   title: string;
@@ -16,20 +17,15 @@ export interface Product {
 }
 
 export interface CartProduct {
+  id?: string;
   market: string;
   category: string;
   imageUrl: string;
   title: string;
   price?: string;
-  // oldPrice?: string;
   dateTo?: string;
   discount?: string;
-  // xIcons?: number;
-  // specImg?: {
-  //   market?: string;
-  //   spec?: string;
-  // };
-  // description?: string;
+  description?: string;
   remove?: boolean;
 }
 
@@ -37,6 +33,7 @@ export enum enumMarketsList {
   MAXIMA = 'maxima',
   IKI = 'iki',
   RIMI = 'rimi',
+  LIDL = 'lidl',
 }
 
 export interface Market {
@@ -50,4 +47,5 @@ export const listOfMarkets: Market[] = [
   { id: 1, name: 'maxima', label: 'Maxima' },
   { id: 2, name: 'iki', label: 'IKI' },
   { id: 3, name: 'rimi', label: 'Rimi' },
+  { id: 4, name: 'lidl', label: 'Lidl' },
 ];
