@@ -8,24 +8,43 @@ import {
   inject,
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, fromEvent, map } from 'rxjs';
-import { Product, listOfMarkets } from '../product.interface';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Product, enumMarketsList, listOfMarkets } from '../product.interface';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { FirebaseService } from '../firebase.service';
-import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgFor, NgIf, ViewportScroller } from '@angular/common';
 import { transformPrices } from '../utils';
 import { AddToCartService } from '../add-to-cart.service';
+import { HeaderComponent } from './header/header.component';
+import { ScrollComponent } from '../scroll/scroll.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CardComponent } from './card/card.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
+  standalone: true,
   selector: 'app-content',
   templateUrl: 'content.component.html',
   styleUrls: ['content.component.scss'],
+  imports: [
+    NgFor,
+    NgIf,
+    AsyncPipe,
+    MatTabsModule,
+    HeaderComponent,
+    FooterComponent,
+    ScrollComponent,
+    CardComponent,
+    MatProgressSpinnerModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentComponent implements OnInit, OnDestroy {
   firestoreService = inject(FirebaseService);
   cartService = inject(AddToCartService);
+  cdr = inject(ChangeDetectorRef);
   private readonly document = inject(DOCUMENT);
   private readonly viewport = inject(ViewportScroller);
+  enumMarketsList = enumMarketsList;
   transformPrices = transformPrices;
   products$ = new BehaviorSubject<Product[]>([
     {
@@ -47,15 +66,13 @@ export class ContentComponent implements OnInit, OnDestroy {
     map(() => this.viewport.getScrollPosition()?.[1] > 0)
   );
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
   ngOnInit() {
-    this.getMarketTab('maxima');
+    this.getMarketTab(enumMarketsList.MAXIMA);
     this.cartService.getOldProducts();
     this.cdr.detectChanges();
   }
 
-  getAddItemEmitter(product: Product, index: number) {
+  getAddItemEmitter(product: Product) {
     const { priceEur, priceCents } = product;
     const mappedProduct = {
       ...product,

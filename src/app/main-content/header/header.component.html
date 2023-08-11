@@ -9,9 +9,10 @@
       (click)="openCartDialog()"
     >
       <mat-icon fontIcon="shopping_cart"></mat-icon>
-      <span class="cart-button-title">Vežimėlis</span>
-      <!-- {{ items$ | async }}
-      {{ cartService.counterCartSignal() }} -->
+      <span
+        >Vežimėlis
+        <span>{{ cartService.countCartLenSignal() > 0 ? cartService.countCartLenSignal() : null }}</span></span
+      >
     </button>
   </div>
 </mat-toolbar>
