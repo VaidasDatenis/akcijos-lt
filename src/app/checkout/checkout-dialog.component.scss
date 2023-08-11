@@ -31,7 +31,57 @@
 
     .product-details {
       display: block;
-      padding-left: 15px;
+      padding: 15px 0 0 15px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .buttons-container {
+      display: flex;
+      margin-left: auto;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px 0 10px;
+
+      .quantity-title {
+        padding: 0 10px;
+      }
+
+      .card-cart-button {
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        color: rgb(0, 0, 0);
+        border: 0.8px solid black;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+        transition-duration: 0.4s;
+        -webkit-transition-duration: 0.4s; /* Safari */
+  
+        &:hover {
+          transition-duration: 0.1s;
+          background-color: #e7e6e6;
+        }
+  
+        ::after {
+          content: "";
+          display: block;
+          border-radius: 4em;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: all 0.5s;
+          box-shadow: 0 0 10px 40px white;
+        }
+  
+        &:active {
+          box-shadow: 0 0 0 0 rgb(128, 128, 128);
+          border-radius: 4em;
+          opacity: 1;
+          transition: 0s;
+        }
+      }
     }
   }
 }
@@ -60,20 +110,52 @@
 
     .cart-product-container {
       display: grid;
-      grid-template-columns: repeat(1, 67%);
-      width: 100%;
+      grid-template-columns: 1fr;
+      // width: 100%;
       height: 50%;
-      justify-content: center;
-      align-items: center;
+      // justify-content: center;
+      // align-items: center;
 
       .image-conntent {
         grid-column: 1 / 1;
         grid-row: 1;
+
+        img {
+          margin-left: 3rem;
+          margin-top: 0.5rem;
+        }
       }
 
       .product-details {
         grid-column: 1 / 1;
         grid-row: 2;
+        margin-left: 3rem;
+        
+        .product-details-title {
+          margin-bottom: 0.3rem;
+        }
+      }
+
+      .buttons-container {
+        grid-column: 1 / 1;
+        grid-row: 3;
+        margin: 0 0 0.2rem 0;
+
+        .quantity-title {
+          padding: 0 30px;
+        }
+
+        .card-cart-button {
+          box-shadow: none;
+
+          ::after {
+            box-shadow: 0 0 10px 40px white;
+          }
+    
+          &:active {
+            box-shadow: 0 0 0 0 rgb(128, 128, 128);
+          }
+        }
       }
     }
   }

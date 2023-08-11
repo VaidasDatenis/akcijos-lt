@@ -1,27 +1,24 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AddToCartService } from '../add-to-cart.service';
 import { CommonModule } from '@angular/common';
-import { CheckoutDialog } from '../checkout/checkout-dialog.component';
-import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
+import { CheckoutDialog } from '../../checkout/checkout-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddToCartService } from '../../add-to-cart.service';
 
 @Component({
+  standalone: true,
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.scss'],
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, MatDialogModule, MatToolbarModule, CheckoutDialog],
-  providers: [AddToCartService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   cartService = inject(AddToCartService);
   dialog = inject(MatDialog);
-
-  items$ = this.cartService.counterCart$.pipe(map((num) => num));
+  @Input() cartLength = 0;
 
   openCartDialog(): void {
     this.dialog.open(CheckoutDialog, {

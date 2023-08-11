@@ -19,14 +19,10 @@ export interface Product {
 export interface CartProduct {
   id?: string;
   market: string;
-  category: string;
   imageUrl: string;
   title: string;
   price?: string;
-  dateTo?: string;
-  discount?: string;
-  description?: string;
-  remove?: boolean;
+  quantity?: number;
 }
 
 export enum enumMarketsList {

@@ -11,7 +11,7 @@
 <!-- content -->
 <mat-dialog-content class="dialog-content">
   <div
-    *ngFor="let product of getFromStorage()"
+    *ngFor="let product of cartService.cartListSignal()"
     class="cart-product-container"
   >
     <!-- <h4 *ngIf="product.market === enumMarketsList.MAXIMA">Maxima</h4> -->
@@ -24,16 +24,31 @@
       />
     </div>
     <div class="product-details">
-      <p>{{ product.title }}</p>
-      <p>{{ product.category }}</p>
-      <p>{{ product.dateTo }}</p>
+      <p class="product-details-title">{{ product.title }}</p>
       <p>{{ product.price }} €</p>
+    </div>
+    <div class="buttons-container">
+      <!-- <button
+        class="card-cart-button"
+        (click)="addOneMore(product)"
+        >+</button
+      >
+      <span class="quantity-title">0 vnt.</span> -->
+      <button
+        class="card-cart-button"
+        (click)="removeFromCart(product)"
+        >-</button
+      >
     </div>
   </div>
 </mat-dialog-content>
 <!-- footer -->
 <mat-dialog-actions class="dialog-footer">
-  <span class="cart-value">Krepšelio vertė:&emsp;{{ totalCartValue || '0' }}&nbsp;€</span>
+  <span
+    *ngIf="cartService.totalCartCostSignal()"
+    class="cart-value"
+    >Krepšelio vertė:&emsp;{{ cartService.totalCartCostSignal() | number: '1.2-2' }}&nbsp;€</span
+  >
   <mat-toolbar>
     <button
       class="clean-button"

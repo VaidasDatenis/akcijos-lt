@@ -1,3 +1,4 @@
+<app-header></app-header>
 <app-scroll
   *ngIf="showScroll$ | async"
   (scrollToTop)="onScrollToTop()"
@@ -34,11 +35,11 @@
             <div class="main-content">
               <div
                 class="products-content"
-                *ngFor="let product of productsByCategory(category) | async; let index = index"
+                *ngFor="let product of productsByCategory(category) | async"
               >
                 <app-card
                   [product]="product"
-                  (emitAddEvent)="getAddItemEmitter($event, index)"
+                  (emitAddEvent)="getAddItemEmitter($event)"
                 ></app-card>
               </div>
             </div>
@@ -48,3 +49,4 @@
     </ng-template>
   </mat-tab>
 </mat-tab-group>
+<app-footer></app-footer>
