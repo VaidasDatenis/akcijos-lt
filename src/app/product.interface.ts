@@ -22,7 +22,7 @@ export interface CartProduct {
   imageUrl: string;
   title: string;
   price?: string;
-  quantity?: number;
+  quantity: number;
 }
 
 export enum enumMarketsList {

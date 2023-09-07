@@ -72,14 +72,17 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  getAddItemEmitter(product: Product) {
-    const { priceEur, priceCents } = product;
+  addItemEmitter(product: Product) {
+    // const { priceEur, priceCents } = product;
     const mappedProduct = {
-      ...product,
+      id: product?.id,
+      imageUrl: product.imageUrl,
+      title: product.title,
       market: this.marketName,
-      price: this.transformPrices(priceEur, priceCents),
+      price: this.transformPrices(product.priceEur, product.priceCents),
+      quantity: 1,
     };
-    this.cartService.addCartItem(mappedProduct);
+    this.cartService.addProductToCart(mappedProduct);
   }
 
   getMarketTab(marketName: string) {
