@@ -12,25 +12,23 @@ export class AddToCartService {
   });
 
   addProductToCart(item: CartProduct) {
-    if (this.cartListSignal().length) {
-      // const stupid1 = this.cartListSignal().filter((cartItem) => item.id === cartItem.id); // object
-      // const stupid2 = this.cartListSignal().map((cartItem) => item.id === cartItem.id); // true / false
-      // console.log(stupid1);
-      this.cartListSignal.mutate((cartProducts) => {
-        cartProducts.forEach((cartItem) => {
-          if (cartItem.id === item.id) {
-            // console.log(cartItem.id === item.id);
-            cartItem.quantity += 1;
-          } else if (cartItem.id !== item.id) {
-            // console.log(1);
-            cartProducts.push(item);
-          }
-        });
-        return cartProducts;
+    // if (this.cartListSignal().length) {
+    // console.log(item);
+    this.cartListSignal.mutate((cartProducts) => {
+      return cartProducts.forEach((cartItem) => {
+        if (item && cartItem.id === item.id) {
+          // console.log(cartItem.id === item.id);
+          return (cartItem.quantity += 1);
+        } else if (cartItem.id !== item.id) {
+          // console.log(1);
+          return cartProducts.push(item);
+        }
+        return cartItem;
       });
-    } else {
-      this.cartListSignal.mutate((cartProducts) => cartProducts.push(item));
-    }
+    });
+    // } else {
+    //   this.cartListSignal.mutate((cartProducts) => cartProducts.push(item));
+    // }
     localStorage.setItem('cart-products', JSON.stringify(this.cartListSignal()));
   }
 
