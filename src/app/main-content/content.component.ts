@@ -12,13 +12,14 @@ import { Product, enumMarketsList, listOfMarkets } from '../product.interface';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { FirebaseService } from '../firebase.service';
 import { AsyncPipe, DOCUMENT, NgFor, NgIf, ViewportScroller } from '@angular/common';
-import { transformPrices } from '../utils';
+import { mapProductToCartProduct } from '../utils';
 import { AddToCartService } from '../add-to-cart.service';
 import { HeaderComponent } from './header/header.component';
 import { ScrollComponent } from '../scroll/scroll.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CardComponent } from './card/card.component';
 import { FooterComponent } from '../footer/footer.component';
+import { CardService } from '../card.service';
 
 @Component({
   standalone: true,
@@ -45,7 +46,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   private readonly document = inject(DOCUMENT);
   private readonly viewport = inject(ViewportScroller);
   enumMarketsList = enumMarketsList;
-  transformPrices = transformPrices;
   products$ = new BehaviorSubject<Product[]>([
     {
       category: '',
@@ -73,16 +73,15 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   addItemEmitter(product: Product) {
-    // const { priceEur, priceCents } = product;
-    const mappedProduct = {
-      id: product?.id,
-      imageUrl: product.imageUrl,
-      title: product.title,
-      market: this.marketName,
-      price: this.transformPrices(product.priceEur, product.priceCents),
-      quantity: 1,
-    };
+    console.log(product.id)
+    const mappedProduct = mapProductToCartProduct(product, this.marketName);
     this.cartService.addProductToCart(mappedProduct);
+  }
+
+  removeFromCartEmitter(product: Product) {
+    console.log(product.id)
+    const mappedProduct = mapProductToCartProduct(product, this.marketName);
+    this.cartService.removeFromCart(mappedProduct);
   }
 
   getMarketTab(marketName: string) {

@@ -1,4 +1,4 @@
-import { keys } from "key-values";
+import { keys } from '../../key-values';
 
 export const environment = {
   production: false,

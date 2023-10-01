@@ -28,16 +28,16 @@
       <p>{{ product.price }} €</p>
     </div>
     <div class="buttons-container">
-      <!-- <button
-        class="card-cart-button"
-        (click)="addOneMore(product)"
-        >+</button
-      > -->
-      <span class="quantity-title">{{ product.quantity }} vnt.</span>
       <button
         class="card-cart-button"
         (click)="removeFromCart(product)"
         >-</button
+      >
+      <span class="quantity-title">{{ product.quantity }} vnt.</span>
+      <button
+        class="card-cart-button"
+        (click)="addOneMore(product)"
+        >+</button
       >
     </div>
   </div>

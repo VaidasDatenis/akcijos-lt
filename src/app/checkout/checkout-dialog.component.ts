@@ -19,7 +19,9 @@ export class CheckoutDialog {
   cartService = inject(AddToCartService);
   enumMarketsList = enumMarketsList;
 
-  addOneMore(product: CartProduct) {}
+  addOneMore(product: CartProduct) {
+    this.cartService.addProductToCart(product);
+  }
 
   removeFromCart(product: CartProduct) {
     this.cartService.removeFromCart(product);

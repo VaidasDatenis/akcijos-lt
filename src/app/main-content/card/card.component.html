@@ -28,6 +28,13 @@
   <div class="card-cart">
     <button
       class="card-cart-button"
+      (click)="removeFromCart(product)"
+      [disabled]="cardService.isRemoveProductDisabled()"
+      >-</button
+    >
+    <span class="card-product-total"> {{ cardService.cartQuantitySignal() }} vnt.</span>
+    <button
+      class="card-cart-button"
       (click)="addToCart(product)"
       >+</button
     >
@@ -45,10 +52,10 @@
       <span
         *ngIf="product.priceEur"
         class="card-price"
-        >{{ transformPrices(product.priceEur, product.priceCents) }} €</span
+        >{{ transformPricesUtil(product.priceEur, product.priceCents) }} €</span
       >
       <span class="card-price-termination mt-2">
-        {{ transformDateTo(product.dateTo) }}
+        {{ transformDateToUtil(product.dateTo) }}
         <span
           class="x-icons"
           *ngIf="product.xIcons"

@@ -33,15 +33,13 @@
               </div>
             </ng-container>
             <div class="main-content">
-              <div
-                class="products-content"
+              <app-card
                 *ngFor="let product of productsByCategory(category) | async"
-              >
-                <app-card
-                  [product]="product"
-                  (emitAddEvent)="addItemEmitter($event)"
-                ></app-card>
-              </div>
+                [product]="product"
+                [marketName]="market.label"
+                (emitAddEvent)="addItemEmitter($event)"
+                (emitRemoveEvent)="removeFromCartEmitter($event)"
+              ></app-card>
             </div>
           </ng-template>
         </mat-tab>
