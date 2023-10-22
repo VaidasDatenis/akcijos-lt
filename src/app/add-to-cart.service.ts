@@ -1,12 +1,10 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { CartProduct } from './product.interface';
-import { CardService } from './card.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddToCartService {
-  cardService = inject(CardService);
   cartListSignal = signal<CartProduct[]>([]);
   countCartLenSignal = computed(() => {
     return this.cartListSignal().reduce((acc, cur) => acc + cur.quantity, 0);
@@ -14,28 +12,47 @@ export class AddToCartService {
   totalCartCostSignal = computed(() => {
     return this.cartListSignal().reduce((acc, cur) => acc + Number(cur.price) * cur.quantity, 0);
   });
+  // categorizedCartList = computed(() => {
+  //   return this.cartListSignal().reduce((r, a) => {
+  //     r[a.market] = r[a.market] || [];
+  //     r[a.market].push(a);
+  //     return r;
+  //   }, Object.create([]));
+  // });
+
+  getProductQuantityById(id: string) {
+    if (this.cartListSignal().length) {
+      const item = this.cartListSignal().find(x => x.id === id);
+      return item?.quantity;
+    }
+    return 0;
+  }
+
+  getProductPriceByQuantity(id: string) {
+    const item = this.cartListSignal().find(x => x.id === id);
+    if (item?.price && item?.quantity) {
+      return Number(item.price) * item.quantity
+    }
+    return null;
+  }
 
   addProductToCart(item: CartProduct) {
-    this.cardService.addCardSingleProduct();
-    if (this.cartListSignal().length) {
-      if (this.cartListSignal().find(product => product.id === item.id)) {
-        this.cartListSignal.mutate((cartProducts) => {
-          for (const cartItem of cartProducts) {
-            cartItem.quantity += 1;
-          };
-        });
+    this.cartListSignal.mutate((cartProducts) => {
+      if (cartProducts.length) {
+        const itemFound = cartProducts.find(product => product.id === item.id)
+        if (itemFound) {
+          itemFound.quantity += 1;
+        } else {
+          cartProducts.push(item);
+        }
       } else {
-        this.cartListSignal().push(item);
+        cartProducts.push(item);
       }
-    } else {
-      this.cartListSignal().push(item);
-    }
-    console.log(this.countCartLenSignal());
+    });
     localStorage.setItem('cart-products', JSON.stringify(this.cartListSignal()));
   }
 
   removeFromCart(product: CartProduct) {
-    this.cardService.removeFromCardSigngleProduct();
     this.cartListSignal.mutate((cartProducts) => {
       if (cartProducts.length) {
         cartProducts.forEach((cartItem, index) => {
@@ -62,6 +79,5 @@ export class AddToCartService {
   clearCart() {
     localStorage.removeItem('cart-products');
     this.cartListSignal.mutate((values) => (values.length = 0));
-    this.cardService.cartQuantitySignal.set(0);
   }
 }

@@ -19,7 +19,6 @@ import { ScrollComponent } from '../scroll/scroll.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CardComponent } from './card/card.component';
 import { FooterComponent } from '../footer/footer.component';
-import { CardService } from '../card.service';
 
 @Component({
   standalone: true,
@@ -48,9 +47,13 @@ export class ContentComponent implements OnInit, OnDestroy {
   enumMarketsList = enumMarketsList;
   products$ = new BehaviorSubject<Product[]>([
     {
+      id: '',
       category: '',
       imageUrl: '',
       title: '',
+      priceEur: '',
+      priceCents: '',
+      dateTo: '',
     },
   ]);
   onDestroy$ = new Subject<void>();
@@ -73,13 +76,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   addItemEmitter(product: Product) {
-    console.log(product.id)
     const mappedProduct = mapProductToCartProduct(product, this.marketName);
     this.cartService.addProductToCart(mappedProduct);
   }
 
   removeFromCartEmitter(product: Product) {
-    console.log(product.id)
     const mappedProduct = mapProductToCartProduct(product, this.marketName);
     this.cartService.removeFromCart(mappedProduct);
   }

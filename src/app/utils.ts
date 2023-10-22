@@ -1,6 +1,6 @@
 import { Product } from "./product.interface";
 
-export const transformPrices = (euroValue: string | undefined, centValue: string | undefined) => {
+export const transformPrices = (euroValue: string, centValue: string) => {
   if (!euroValue && !centValue) {
     return '';
   }
@@ -15,7 +15,7 @@ export const transformPrices = (euroValue: string | undefined, centValue: string
 
 export const mapProductToCartProduct = (product: Product, marketName: string) => {
   return {
-    id: product?.id,
+    id: product.id,
     imageUrl: product.imageUrl,
     title: product.title,
     market: marketName,
@@ -24,7 +24,7 @@ export const mapProductToCartProduct = (product: Product, marketName: string) =>
   };
 }
 
-export const transformDateTo = (dateTo: string | undefined) => {
-  const transDate = dateTo?.replace('Pasiūlymas galioja', '');
+export const transformDateTo = (dateTo: string) => {
+  const transDate = dateTo.replace('Pasiūlymas galioja', '');
   return `${transDate}`;
 }

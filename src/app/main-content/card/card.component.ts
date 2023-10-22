@@ -6,7 +6,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Product } from 'src/app/product.interface';
 import { SpecImageComponent } from '../spec-img/spec-img.component';
 import { transformDateTo, transformPrices } from '../../utils';
-import { CardService } from 'src/app/card.service';
+import { AddToCartService } from 'src/app/add-to-cart.service';
 
 @Component({
   standalone: true,
@@ -17,7 +17,7 @@ import { CardService } from 'src/app/card.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  cardService = inject(CardService);
+  cartService = inject(AddToCartService);
   @Input() product!: Product;
   @Input() marketName!: string;
   @Output() emitAddEvent = new EventEmitter<Product>();
@@ -31,11 +31,11 @@ export class CardComponent {
     this.emitRemoveEvent.emit(product);
   }
 
-  transformDateToUtil(dateTo: string | undefined) {
+  transformDateToUtil(dateTo: string) {
     return transformDateTo(dateTo);
   }
 
-  transformPricesUtil(priceEur: string | undefined, prieCent: string | undefined) {
+  transformPricesUtil(priceEur: string, prieCent: string) {
     return transformPrices(priceEur, prieCent);
   }
 }

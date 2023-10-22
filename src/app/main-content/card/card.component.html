@@ -19,27 +19,10 @@
       <ng-template #noDescription>&nbsp;</ng-template>
     </mat-card-subtitle>
   </mat-card-header>
-  <div
-    *ngIf="product.discount"
-    class="card-discount"
-  >
-    <h3>{{ product.discount }}</h3>
-  </div>
-  <div class="card-cart">
-    <button
-      class="card-cart-button"
-      (click)="removeFromCart(product)"
-      [disabled]="cardService.isRemoveProductDisabled()"
-      >-</button
-    >
-    <span class="card-product-total"> {{ cardService.cartQuantitySignal() }} vnt.</span>
-    <button
-      class="card-cart-button"
-      (click)="addToCart(product)"
-      >+</button
-    >
-  </div>
   <div class="card-image">
+    <div *ngIf="product.discount" class="card-discount">
+      <h3>{{ product.discount }}</h3>
+    </div>
     <img
       mat-card-image
       class="img-thumbnail"
@@ -47,6 +30,22 @@
       [alt]="product.title"
     />
   </div>
+  <mat-card-actions>
+    <div class="card-actions">
+      <button
+        class="card-button"
+        (click)="removeFromCart(product)"
+        [disabled]="!cartService.getProductQuantityById(product.id)"
+        >-</button
+      >
+      <span class="card-product-total"> {{ cartService.getProductQuantityById(product.id) || 0 }} vnt.</span>
+      <button
+        class="card-button"
+        (click)="addToCart(product)"
+        >+</button
+      >
+    </div>
+  </mat-card-actions>
   <mat-card-content class="card-content">
     <div class="d-flex">
       <span
