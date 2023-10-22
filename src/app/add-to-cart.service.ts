@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { CartProduct } from './product.interface';
 
 @Injectable({
@@ -6,18 +6,65 @@ import { CartProduct } from './product.interface';
 })
 export class AddToCartService {
   cartListSignal = signal<CartProduct[]>([]);
-  countCartLenSignal = computed<number>(() => this.cartListSignal().length);
-  totalCartCostSignal = computed(() => {
-    return this.cartListSignal().reduce((acc, cur) => acc + Number(cur.price), 0);
+  countCartLenSignal = computed(() => {
+    return this.cartListSignal().reduce((acc, cur) => acc + cur.quantity, 0);
   });
+  totalCartCostSignal = computed(() => {
+    return this.cartListSignal().reduce((acc, cur) => acc + Number(cur.price) * cur.quantity, 0);
+  });
+  // categorizedCartList = computed(() => {
+  //   return this.cartListSignal().reduce((r, a) => {
+  //     r[a.market] = r[a.market] || [];
+  //     r[a.market].push(a);
+  //     return r;
+  //   }, Object.create([]));
+  // });
 
-  addCartItem(item: CartProduct) {
-    this.cartListSignal.mutate((values) => values.push(item));
+  getProductQuantityById(id: string) {
+    if (this.cartListSignal().length) {
+      const item = this.cartListSignal().find(x => x.id === id);
+      return item?.quantity;
+    }
+    return 0;
+  }
+
+  getProductPriceByQuantity(id: string) {
+    const item = this.cartListSignal().find(x => x.id === id);
+    if (item?.price && item?.quantity) {
+      return Number(item.price) * item.quantity
+    }
+    return null;
+  }
+
+  addProductToCart(item: CartProduct) {
+    this.cartListSignal.mutate((cartProducts) => {
+      if (cartProducts.length) {
+        const itemFound = cartProducts.find(product => product.id === item.id)
+        if (itemFound) {
+          itemFound.quantity += 1;
+        } else {
+          cartProducts.push(item);
+        }
+      } else {
+        cartProducts.push(item);
+      }
+    });
     localStorage.setItem('cart-products', JSON.stringify(this.cartListSignal()));
   }
 
   removeFromCart(product: CartProduct) {
-    this.cartListSignal.update(() => this.cartListSignal().filter((item) => item !== product));
+    this.cartListSignal.mutate((cartProducts) => {
+      if (cartProducts.length) {
+        cartProducts.forEach((cartItem, index) => {
+          if (cartItem.id === product.id) {
+            cartItem.quantity -= 1;
+            if (cartItem.quantity < 1) {
+              cartProducts.splice(index, 1);
+            }
+          }
+        });
+      }
+    });
     localStorage.setItem('cart-products', JSON.stringify(this.cartListSignal()));
   }
 

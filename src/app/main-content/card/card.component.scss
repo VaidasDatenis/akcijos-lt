@@ -1,6 +1,7 @@
 .product-card {
+  display: inline-flex;
   width: 400px;
-  height: 470px;
+  height: 540px;
   margin: 10px;
 
   .card-header {
@@ -20,22 +21,22 @@
     }
   }
 
-  .card-discount {
-    position: absolute;
-    z-index: 1;
-    top: 100px;
-    left: 20px;
-    height: 30px;
-    color: rgb(62, 184, 51);
-  }
+  .card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 5px 8px 5px;
+    border-bottom: 1px solid rgba(202, 202, 202, 0.6);
 
-  .card-cart {
-    position: absolute;
-    z-index: 1;
-    top: 100px;
-    right: 15px;
+    .card-product-total {
+      margin-left: 8px;
+      margin-right: 8px;
+      color: rgb(55, 55, 247);
+      font-weight: 600;
+    }
 
-    .card-cart-button {
+    .card-button {
       cursor: pointer;
       height: 50px;
       width: 50px;
@@ -55,10 +56,7 @@
       ::after {
         content: "";
         display: block;
-        position: absolute;
         border-radius: 4em;
-        top: 1px;
-        right: 1px;
         width: 100%;
         height: 100%;
         opacity: 0;
@@ -68,12 +66,13 @@
 
       &:active {
         box-shadow: 0 0 0 0 rgb(128, 128, 128);
-        position: absolute;
         border-radius: 4em;
-        top: 1px;
-        right: 1px;
         opacity: 1;
         transition: 0s;
+      }
+
+      &:disabled {
+        opacity: 0.3;
       }
     }
   }
@@ -83,6 +82,15 @@
     width: 400px;
     height: 300px;
     z-index: 0;
+
+    .card-discount {
+      position: absolute;
+      z-index: 1;
+      bottom: 10px;
+      left: 10px;
+      height: 30px;
+      color: rgb(39, 162, 28);
+    }
 
     img {
       aspect-ratio: 12/9;

@@ -1,7 +1,7 @@
-import { keys } from '../../key-values';
+import { keys } from "key-values";
 
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     projectId: keys.projectId,
     appId: keys.appId,

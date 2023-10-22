@@ -1,12 +1,12 @@
 export interface Product {
-  id?: string;
+  id: string;
   category: string;
   imageUrl: string;
   title: string;
-  priceEur?: string;
-  priceCents?: string;
+  priceEur: string;
+  priceCents: string;
   oldPrice?: string;
-  dateTo?: string;
+  dateTo: string;
   discount?: string;
   xIcons?: number;
   specImg?: {
@@ -17,12 +17,12 @@ export interface Product {
 }
 
 export interface CartProduct {
-  id?: string;
+  id: string;
   market: string;
   imageUrl: string;
   title: string;
-  price?: string;
-  quantity?: number;
+  price: string;
+  quantity: number;
 }
 
 export enum enumMarketsList {

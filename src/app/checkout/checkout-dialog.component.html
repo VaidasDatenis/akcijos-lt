@@ -10,46 +10,137 @@
 </mat-dialog-actions>
 <!-- content -->
 <mat-dialog-content class="dialog-content">
-  <div
-    *ngFor="let product of cartService.cartListSignal()"
-    class="cart-product-container"
-  >
-    <!-- <h4 *ngIf="product.market === enumMarketsList.MAXIMA">Maxima</h4> -->
-    <div class="image-conntent">
-      <img
-        mat-card-image
-        class="img-thumbnail"
-        [src]="product.imageUrl"
-        [alt]="product.title"
-      />
+  <div *ngFor="let product of cartService.cartListSignal()">
+    <div *ngIf="product.market === enumMarketsList.MAXIMA">
+      <h4>{{ product.market }}</h4>
+      <div class="cart-product-container">
+        <div class="image-content">
+          <img
+            mat-card-image
+            class="img-thumbnail"
+            [src]="product.imageUrl"
+            [alt]="product.title"
+          />
+        </div>
+        <div class="product-details">
+          <p class="product-details-title">{{ product.title }}</p>
+          <p>{{ cartService.getProductPriceByQuantity(product.id) }} €</p>
+        </div>
+        <div class="buttons-container">
+          <button
+            class="card-cart-button"
+            (click)="removeFromCart(product)"
+            >-</button
+          >
+          <span class="quantity-title">{{ product.quantity }} vnt.</span>
+          <button
+            class="card-cart-button"
+            (click)="addOneMore(product)"
+            >+</button
+          >
+        </div>
+      </div>
     </div>
-    <div class="product-details">
-      <p class="product-details-title">{{ product.title }}</p>
-      <p>{{ product.price }} €</p>
+    <div *ngIf="product.market === enumMarketsList.IKI">
+      <h4>{{ product.market }}</h4>
+      <div class="cart-product-container">
+        <div class="image-content">
+          <img
+            mat-card-image
+            class="img-thumbnail"
+            [src]="product.imageUrl"
+            [alt]="product.title"
+          />
+        </div>
+        <div class="product-details">
+          <p class="product-details-title">{{ product.title }}</p>
+          <p>{{ cartService.getProductPriceByQuantity(product.id) }} €</p>
+        </div>
+        <div class="buttons-container">
+          <button
+            class="card-cart-button"
+            (click)="removeFromCart(product)"
+            >-</button
+          >
+          <span class="quantity-title">{{ product.quantity }} vnt.</span>
+          <button
+            class="card-cart-button"
+            (click)="addOneMore(product)"
+            >+</button
+          >
+        </div>
+      </div>
     </div>
-    <div class="buttons-container">
-      <!-- <button
-        class="card-cart-button"
-        (click)="addOneMore(product)"
-        >+</button
-      >
-      <span class="quantity-title">0 vnt.</span> -->
-      <button
-        class="card-cart-button"
-        (click)="removeFromCart(product)"
-        >-</button
-      >
+    <div *ngIf="product.market === enumMarketsList.RIMI">
+      <h4>{{ product.market }}</h4>
+      <div class="cart-product-container">
+        <div class="image-content">
+          <img
+            mat-card-image
+            class="img-thumbnail"
+            [src]="product.imageUrl"
+            [alt]="product.title"
+          />
+        </div>
+        <div class="product-details">
+          <p class="product-details-title">{{ product.title }}</p>
+          <p>{{ cartService.getProductPriceByQuantity(product.id) }} €</p>
+        </div>
+        <div class="buttons-container">
+          <button
+            class="card-cart-button"
+            (click)="removeFromCart(product)"
+            >-</button
+          >
+          <span class="quantity-title">{{ product.quantity }} vnt.</span>
+          <button
+            class="card-cart-button"
+            (click)="addOneMore(product)"
+            >+</button
+          >
+        </div>
+      </div>
+    </div>
+    <div *ngIf="product.market === enumMarketsList.LIDL">
+      <h4>{{ product.market }}</h4>
+      <div class="cart-product-container">
+        <div class="image-content">
+          <img
+            mat-card-image
+            class="img-thumbnail"
+            [src]="product.imageUrl"
+            [alt]="product.title"
+          />
+        </div>
+        <div class="product-details">
+          <p class="product-details-title">{{ product.title }}</p>
+          <p>{{ cartService.getProductPriceByQuantity(product.id) }} €</p>
+        </div>
+        <div class="buttons-container">
+          <button
+            class="card-cart-button"
+            (click)="removeFromCart(product)"
+            >-</button
+          >
+          <span class="quantity-title">{{ product.quantity }} vnt.</span>
+          <button
+            class="card-cart-button"
+            (click)="addOneMore(product)"
+            >+</button
+          >
+        </div>
+      </div>
     </div>
   </div>
 </mat-dialog-content>
 <!-- footer -->
 <mat-dialog-actions class="dialog-footer">
-  <span
-    *ngIf="cartService.totalCartCostSignal()"
-    class="cart-value"
-    >Krepšelio vertė:&emsp;{{ cartService.totalCartCostSignal() | number: '1.2-2' }}&nbsp;€</span
-  >
   <mat-toolbar>
+    <span
+      *ngIf="cartService.totalCartCostSignal()"
+      class="cart-value"
+      >Krepšelio vertė:&emsp;{{ cartService.totalCartCostSignal() | number: '1.2-2' }}&nbsp;€</span
+    >
     <button
       class="clean-button"
       mat-fab

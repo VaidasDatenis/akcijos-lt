@@ -12,7 +12,7 @@ import { Product, enumMarketsList, listOfMarkets } from '../product.interface';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { FirebaseService } from '../firebase.service';
 import { AsyncPipe, DOCUMENT, NgFor, NgIf, ViewportScroller } from '@angular/common';
-import { transformPrices } from '../utils';
+import { mapProductToCartProduct } from '../utils';
 import { AddToCartService } from '../add-to-cart.service';
 import { HeaderComponent } from './header/header.component';
 import { ScrollComponent } from '../scroll/scroll.component';
@@ -45,12 +45,15 @@ export class ContentComponent implements OnInit, OnDestroy {
   private readonly document = inject(DOCUMENT);
   private readonly viewport = inject(ViewportScroller);
   enumMarketsList = enumMarketsList;
-  transformPrices = transformPrices;
   products$ = new BehaviorSubject<Product[]>([
     {
+      id: '',
       category: '',
       imageUrl: '',
       title: '',
+      priceEur: '',
+      priceCents: '',
+      dateTo: '',
     },
   ]);
   onDestroy$ = new Subject<void>();
@@ -72,14 +75,14 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  getAddItemEmitter(product: Product) {
-    const { priceEur, priceCents } = product;
-    const mappedProduct = {
-      ...product,
-      market: this.marketName,
-      price: this.transformPrices(priceEur, priceCents),
-    };
-    this.cartService.addCartItem(mappedProduct);
+  addItemEmitter(product: Product) {
+    const mappedProduct = mapProductToCartProduct(product, this.marketName);
+    this.cartService.addProductToCart(mappedProduct);
+  }
+
+  removeFromCartEmitter(product: Product) {
+    const mappedProduct = mapProductToCartProduct(product, this.marketName);
+    this.cartService.removeFromCart(mappedProduct);
   }
 
   getMarketTab(marketName: string) {

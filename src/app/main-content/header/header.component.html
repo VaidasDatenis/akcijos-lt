@@ -11,7 +11,7 @@
       <mat-icon fontIcon="shopping_cart"></mat-icon>
       <span
         >Vežimėlis
-        <span>{{ cartService.countCartLenSignal() > 0 ? cartService.countCartLenSignal() : null }}</span></span
+        <span>{{ cartService.countCartLenSignal() || null }}</span></span
       >
     </button>
   </div>
