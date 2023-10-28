@@ -1,3 +1,7 @@
+:host {
+  margin-bottom: 0.9rem;
+}
+
 .cart-product-container {
   display: flex;
   width: 100%;
@@ -79,20 +83,17 @@
     grid-template-columns: 1fr;
     height: 50%;
 
-    .image-conntent {
+    .image-content {
+      width: auto;
       grid-column: 1 / 1;
       grid-row: 1;
-
-      img {
-        margin-left: 3rem;
-        margin-top: 0.5rem;
-      }
     }
 
     .product-details {
       grid-column: 1 / 1;
       grid-row: 2;
-      margin-left: 3rem;
+      margin: auto;
+      padding: 15px 0 0 0;
       width: 15rem;
       
       .product-details-title {
@@ -103,7 +104,7 @@
     .buttons-container {
       grid-column: 1 / 1;
       grid-row: 3;
-      margin: 0 0 0.2rem 0;
+      margin: auto auto 0.4rem auto;
 
       .quantity-title {
         padding: 0 30px;
