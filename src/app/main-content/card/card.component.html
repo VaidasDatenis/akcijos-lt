@@ -2,8 +2,6 @@
   <mat-card-header class="card-header">
     <mat-card-title
       class="card-header-title"
-      [matTooltip]="product.title"
-      matTooltipPosition="above"
       >{{ product.title }}</mat-card-title
     >
     <mat-card-subtitle class="card-header-category">
@@ -47,12 +45,15 @@
     </div>
   </mat-card-actions>
   <mat-card-content class="card-content">
-    <div class="d-flex">
+    <div class="price-container">
       <span
-        *ngIf="product.priceEur"
+        *ngIf="product.priceEur; else noPrice"
         class="card-price"
-        >{{ transformPricesUtil(product.priceEur, product.priceCents) }} €</span
-      >
+        >{{ transformPricesUtil(product.priceEur, product.priceCents) }} €
+      </span>
+      <ng-template #noPrice>
+        <span class="card-no-price">Visai produkcijai</span>
+      </ng-template>
       <span class="card-price-termination mt-2">
         {{ transformDateToUtil(product.dateTo) }}
         <span
@@ -71,7 +72,7 @@
         </span> </span
       ><br />
     </div>
-    <div class="card-bottom d-flex justify-content-between">
+    <div class="card-bottom">
       <span
         *ngIf="product.oldPrice"
         class="card-old"

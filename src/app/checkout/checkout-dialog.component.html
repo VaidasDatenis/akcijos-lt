@@ -10,6 +10,9 @@
 </mat-toolbar>
 <!-- content -->
 <mat-dialog-content class="mat-typography dialog-content">
+  <div *ngIf="!cartService.cartListSignal().length" class="empty-cart">
+    Krėpšelis tuščias!
+  </div>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.MAXIMA)" [marketName]="enumMarketsList.MAXIMA"></market-list>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.IKI)" [marketName]="enumMarketsList.IKI"></market-list>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.RIMI)" [marketName]="enumMarketsList.RIMI"></market-list>
@@ -26,7 +29,7 @@
         (click)="clearCart()"
       >
         <mat-icon class="button-icon" fontIcon="delete"></mat-icon>
-        <span class="button-text">Valyti viską</span>        
+        <span class="button-text">Valyti viską</span>
       </button>
       <button
         mat-fab

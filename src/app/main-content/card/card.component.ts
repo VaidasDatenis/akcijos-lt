@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Product } from 'src/app/product.interface';
 import { SpecImageComponent } from '../spec-img/spec-img.component';
 import { transformDateTo, transformPrices } from '../../utils';
@@ -13,7 +12,7 @@ import { AddToCartService } from 'src/app/add-to-cart.service';
   selector: 'app-card',
   templateUrl: 'card.component.html',
   styleUrls: ['card.component.scss'],
-  imports: [CommonModule, SpecImageComponent, MatCardModule, MatProgressSpinnerModule, MatTooltipModule],
+  imports: [CommonModule, SpecImageComponent, MatCardModule, MatProgressSpinnerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
