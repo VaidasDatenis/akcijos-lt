@@ -2,6 +2,11 @@
   margin: 0;
 }
 
+.cart-value {
+  margin-left: auto;
+  font-weight: 599;
+}
+
 .header-icon {
   margin-left: auto;
 }
@@ -12,24 +17,30 @@
 }
 
 // footer
-.dialog-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+.footer-actions {
+  margin-left: auto;
+}
 
-  .cart-value {
-    margin-right: auto;
-    font-weight: 599;
-  }
-  
-  .clean-button {
-    margin-left: auto;
-  }
+.mobile-footer-actions {
+  display: none;
 }
 
 @media (max-width: 500px) {
   .dialog-content {
-    width: 100%;
-    height: 100%;
+    padding: 0 5px 0 5px;
+
+    market-list {
+      margin-bottom: 0.9rem;
+    }
+  }
+
+  .footer-actions {
+    display: none;
+  }
+  .mobile-footer-actions {
+    display: flex;
+    margin-left: auto;
+    flex-wrap: wrap;
+    gap: 15px;
   }
 }

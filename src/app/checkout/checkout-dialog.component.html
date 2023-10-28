@@ -1,46 +1,58 @@
 <!-- header -->
-<mat-dialog-actions>
-  <mat-toolbar
-    ><h4 class="cart-header">Vežimėlis</h4
-    ><mat-icon
-      class="header-icon"
-      fontIcon="shopping_cart"
-    ></mat-icon
-  ></mat-toolbar>
-</mat-dialog-actions>
+<mat-toolbar>
+  <h4 class="cart-header">Vežimėlis</h4>
+  <span
+    *ngIf="cartService.totalCartCostSignal()"
+    class="cart-value"
+    >{{ cartService.totalCartCostSignal() | number: '1.2-2' }}&nbsp;€</span
+  >
+  <mat-icon class="header-icon" fontIcon="shopping_cart"></mat-icon>
+</mat-toolbar>
 <!-- content -->
-<mat-dialog-content class="dialog-content">
+<mat-dialog-content class="mat-typography dialog-content">
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.MAXIMA)" [marketName]="enumMarketsList.MAXIMA"></market-list>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.IKI)" [marketName]="enumMarketsList.IKI"></market-list>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.RIMI)" [marketName]="enumMarketsList.RIMI"></market-list>
   <market-list *ngIf="checkForMarketsInList(enumMarketsList.LIDL)" [marketName]="enumMarketsList.LIDL"></market-list>
 </mat-dialog-content>
 <!-- footer -->
-<mat-dialog-actions class="dialog-footer">
+<mat-dialog-actions>
   <mat-toolbar>
-    <span
-      *ngIf="cartService.totalCartCostSignal()"
-      class="cart-value"
-      >Krepšelio vertė:&emsp;{{ cartService.totalCartCostSignal() | number: '1.2-2' }}&nbsp;€</span
-    >
-    <button
-      class="clean-button"
-      mat-fab
-      extended
-      color="accent"
-      (click)="clearCart()"
-    >
-      <mat-icon fontIcon="delete"></mat-icon>
-      Valyti viską
-    </button>
-    <button
-      mat-fab
-      extended
-      mat-dialog-close
-      color="default"
-    >
-      <mat-icon fontIcon="close"></mat-icon>
-      Uždaryti
-    </button>
+    <div class="footer-actions">
+      <button
+        mat-fab
+        extended
+        color="accent"
+        (click)="clearCart()"
+      >
+        <mat-icon class="button-icon" fontIcon="delete"></mat-icon>
+        <span class="button-text">Valyti viską</span>        
+      </button>
+      <button
+        mat-fab
+        extended
+        mat-dialog-close
+        color="default"
+      >
+        <mat-icon class="button-icon" fontIcon="close"></mat-icon>
+        <span class="button-text">Uždaryti</span>
+      </button>
+    </div>
+    <div class="mobile-footer-actions">
+      <button
+        mat-mini-fab
+        color="accent"
+        (click)="clearCart()"
+      >
+        <mat-icon class="button-icon" fontIcon="delete"></mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        mat-dialog-close
+        color="default"
+      >
+        <mat-icon class="button-icon" fontIcon="close"></mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 </mat-dialog-actions>

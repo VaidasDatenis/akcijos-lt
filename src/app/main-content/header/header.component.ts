@@ -22,8 +22,7 @@ export class HeaderComponent {
 
   openCartDialog(): void {
     this.dialog.open(CheckoutDialog, {
-      height: '800px',
-      width: '800px',
+      width: '90%',
     });
   }
 }
