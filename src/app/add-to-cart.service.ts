@@ -1,5 +1,5 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
-import { CartProduct } from './product.interface';
+import { Injectable, computed, signal } from '@angular/core';
+import { CartProduct, enumMarketsList } from './product.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +12,6 @@ export class AddToCartService {
   totalCartCostSignal = computed(() => {
     return this.cartListSignal().reduce((acc, cur) => acc + Number(cur.price) * cur.quantity, 0);
   });
-  // categorizedCartList = computed(() => {
-  //   return this.cartListSignal().reduce((r, a) => {
-  //     r[a.market] = r[a.market] || [];
-  //     r[a.market].push(a);
-  //     return r;
-  //   }, Object.create([]));
-  // });
 
   getProductQuantityById(id: string) {
     if (this.cartListSignal().length) {
@@ -31,7 +24,7 @@ export class AddToCartService {
   getProductPriceByQuantity(id: string) {
     const item = this.cartListSignal().find(x => x.id === id);
     if (item?.price && item?.quantity) {
-      return Number(item.price) * item.quantity
+      return Number(item.price) * item.quantity;
     }
     return null;
   }

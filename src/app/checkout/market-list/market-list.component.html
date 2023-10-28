@@ -1,0 +1,17 @@
+<h4>{{ marketName | titlecase }}</h4>
+<div *ngFor="let product of filterListByMarket()">
+  <div class="cart-product-container">
+    <div class="image-content">
+      <img mat-card-image class="img-thumbnail" [src]="product.imageUrl" [alt]="product.title" />
+    </div>
+    <div class="product-details">
+      <p class="product-details-title">{{ product.title }}</p>
+      <p>{{ cartService.getProductPriceByQuantity(product.id) | number:'1.0-2' }} €</p>
+    </div>
+    <div class="buttons-container">
+      <button class="card-cart-button" (click)="removeFromCart(product)">-</button>
+      <span class="quantity-title">{{ product.quantity }} vnt.</span>
+      <button class="card-cart-button" (click)="addOneMore(product)">+</button>
+    </div>
+  </div>
+</div>
