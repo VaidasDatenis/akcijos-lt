@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { enumMarketsList } from 'src/app/product.interface';
 
 @Component({
@@ -8,7 +7,7 @@ import { enumMarketsList } from 'src/app/product.interface';
   templateUrl: 'spec-img.component.html',
   styleUrls: ['spec-img.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatTooltipModule],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpecImageComponent {

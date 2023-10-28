@@ -1,4 +1,4 @@
-<h4>{{ marketName | titlecase }}</h4>
+<div class="market-list-title">-- {{ marketName | titlecase }} --</div>
 <div *ngFor="let product of filterListByMarket()">
   <div class="cart-product-container">
     <div class="image-content">
@@ -6,7 +6,14 @@
     </div>
     <div class="product-details">
       <p class="product-details-title">{{ product.title }}</p>
-      <p>{{ cartService.getProductPriceByQuantity(product.id) | number:'1.0-2' }} €</p>
+      <p *ngIf="cartService.getProductPriceByQuantity(product.id); else noPrice"
+        class="product-details-price"
+      >
+        {{ cartService.getProductPriceByQuantity(product.id) | number:'1.0-2' }} €
+      </p>
+      <ng-template #noPrice>
+        <span class="product-details-price">Visa produkcija</span>
+      </ng-template>
     </div>
     <div class="buttons-container">
       <button class="card-cart-button" (click)="removeFromCart(product)">-</button>

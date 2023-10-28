@@ -1,7 +1,7 @@
 .product-card {
   display: inline-flex;
   width: 400px;
-  height: 540px;
+  height: auto;
   margin: 10px;
 
   .card-header {
@@ -9,9 +9,6 @@
     overflow: hidden;
 
     .card-header-title {
-      text-overflow: ellipsis;  /* enables ellipsis */
-      white-space: nowrap;      /* keeps the text in a single line */
-      overflow: hidden;         /* keeps the element from overflowing its parent */
       font-size: 16px;
       font-weight: 590;
     }
@@ -80,7 +77,6 @@
   .card-image {
     position: relative;
     width: 400px;
-    height: 300px;
     z-index: 0;
 
     .card-discount {
@@ -100,16 +96,25 @@
   }
 
   .card-content {
-    height: 40px;
+    height: auto;
 
-    .card-price {
-      margin-right: 3px;
-      font-weight: 590;
-      font-size: 25px;
-    }
+    .price-container {
+      display: flex;
 
-    .card-price-termination {
-      margin-left: auto;
+      .card-price {
+        margin-right: 3px;
+        font-weight: 590;
+        font-size: 25px;
+      }
+
+      .card-no-price {
+        font-weight: 590;
+        font-size: 18px;
+      }
+
+      .card-price-termination {
+        margin-left: auto;
+      }
     }
 
     .x-icon {
@@ -129,6 +134,8 @@
     }
 
     .card-bottom {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       margin-top: 10px;
     }
@@ -137,17 +144,40 @@
 
 @media (max-width: 480px) {
   .product-card {
-    width: 388px;
-    margin: 0.5% 0 0.5% 0;
+    width: 180px;
+    height: auto;
+    margin: 0.5% 0.5% 0.5% 0.5%;
+
+    .card-header {
+      height: auto;
+      padding: 5px 0 0 5px;
+
+      .card-header-title {
+        height: auto;
+      }
+    }
     
     .card-image {
       position: relative;
-      width: 388px; 
+      width: auto;
       
       img {
         aspect-ratio: 11/8;
         object-fit: cover;
         width: 100%;
+      }
+    }
+
+    .card-content {
+      padding: 5px;
+
+      .price-container {
+        display: inline-grid;
+      }
+
+      .card-bottom {
+        display: grid;
+        margin-top: 0;
       }
     }
   }

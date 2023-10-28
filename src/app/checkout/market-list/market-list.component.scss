@@ -2,6 +2,15 @@
   margin-bottom: 0.9rem;
 }
 
+.market-list-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 25px;
+}
+
 .cart-product-container {
   display: flex;
   width: 100%;
@@ -24,6 +33,11 @@
   .product-details {
     padding: 15px 0 0 15px;
     width: 24rem;
+
+    .product-details-price {
+      font-size: 16px;
+      font-weight: 599;
+    }
   }
 
   .buttons-container {
