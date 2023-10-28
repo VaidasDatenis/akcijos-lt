@@ -47,3 +47,5 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 .prettierignore
+/akcijos-lt
+database.rules.json

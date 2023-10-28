@@ -14,12 +14,13 @@ export const transformPrices = (euroValue: string, centValue: string) => {
 };
 
 export const mapProductToCartProduct = (product: Product, marketName: string) => {
+  let productPriceEur = product?.priceEur?.trim();
   return {
     id: product.id,
     imageUrl: product.imageUrl,
     title: product.title,
     market: marketName,
-    price: transformPrices(product.priceEur, product.priceCents),
+    price: transformPrices(productPriceEur, product.priceCents),
     quantity: 1,
   };
 }
