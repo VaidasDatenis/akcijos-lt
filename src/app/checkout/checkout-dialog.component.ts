@@ -26,6 +26,13 @@ export class CheckoutDialog {
     })
   }
 
+  shareMessenger() {}
+
+  shareTwitter(){
+    const twitterUrl = 'https://twitter.com/messages/compose?text=Hello';
+    window.open(twitterUrl, '_blank');
+  }
+
   clearCart() {
     this.cartService.clearCart();
   }

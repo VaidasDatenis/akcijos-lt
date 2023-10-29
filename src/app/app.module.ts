@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+// import { FacebookService,FacebookModule } from 'ng2-facebook-sdk';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     NgOptimizedImage,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    // FacebookModule.forRoot()
   ],
   providers: [
     provideImgixLoader(
@@ -30,4 +32,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  // constructor(private fb: FacebookService) {
+  //   fb.init(environment.FB_CONFIG);
+  // }
+}

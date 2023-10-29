@@ -21,6 +21,19 @@
 <!-- footer -->
 <mat-dialog-actions>
   <mat-toolbar>
+    <div class="shared-media-buttons">
+      <button
+        mat-icon-button
+        (click)="shareMessenger()">
+        <!-- <mat-icon class="button-icon" fontIcon="facebook-messenger"></mat-icon> -->
+        <img src="../../assets/images/messenger.png" />
+      </button>
+      <button class="twitter-dm-button"
+        mat-icon-button
+        (click)="shareTwitter()">
+        <img src="../../assets/images/twitter.png" />
+      </button>
+    </div>
     <div class="footer-actions">
       <button
         mat-fab

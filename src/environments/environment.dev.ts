@@ -11,5 +11,10 @@ export const environment = {
     authDomain: keys.authDomain,
     messagingSenderId: keys.messagingSenderId,
     measurementId: keys.measurementId,
+  },
+  FB_CONFIG: {
+    appId: 'your-app-id',
+    xfbml: true,
+    version: 'v18.0'
   }
 };
