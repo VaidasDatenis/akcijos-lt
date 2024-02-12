@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { enumMarketsList } from 'src/app/product.interface';
+import { MarketListEnum } from 'src/app/product.interface';
 
 @Component({
   selector: 'app-spec-img',
@@ -11,10 +11,9 @@ import { enumMarketsList } from 'src/app/product.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpecImageComponent {
-  @Input()
-  specImage!: {
+  @Input() specImage!: {
     market?: string;
     spec?: string;
   };
-  enumMarketsList = enumMarketsList;
+  marketList = MarketListEnum;
 }

@@ -4,11 +4,10 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, fromEvent, map } from 'rxjs';
-import { Product, enumMarketsList, listOfMarkets } from '../product.interface';
+import { Product, MarketListEnum, listOfMarkets } from '../product.interface';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { FirebaseService } from '../firebase.service';
 import { AsyncPipe, DOCUMENT, NgFor, NgIf, ViewportScroller } from '@angular/common';
@@ -39,13 +38,13 @@ import { FooterComponent } from '../footer/footer.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentComponent implements OnInit, OnDestroy {
-  firestoreService = inject(FirebaseService);
-  cartService = inject(AddToCartService);
-  cdr = inject(ChangeDetectorRef);
+  private firestoreService = inject(FirebaseService);
+  private cartService = inject(AddToCartService);
+  private cdr = inject(ChangeDetectorRef);
   private readonly document = inject(DOCUMENT);
   private readonly viewport = inject(ViewportScroller);
-  enumMarketsList = enumMarketsList;
-  products$ = new BehaviorSubject<Product[]>([
+  private marketList = MarketListEnum;
+  private products$ = new BehaviorSubject<Product[]>([
     {
       id: '',
       category: '',
@@ -56,21 +55,17 @@ export class ContentComponent implements OnInit, OnDestroy {
       dateTo: '',
     },
   ]);
-  onDestroy$ = new Subject<void>();
-  asyncTabs = new BehaviorSubject<Set<string>>(new Set<string>());
+  private onDestroy$ = new Subject<void>();
+  private marketName = 'maxima';
   asyncCategories = new Set<string>();
-  marketName = 'maxima';
   marketsList = listOfMarkets;
-
-  @ViewChild('marketTabGroup') marketTabGroup!: { selectedIndex: number };
-  @ViewChild('tabGroup') tabGroup!: { selectedIndex: number };
 
   readonly showScroll$: Observable<boolean> = fromEvent(this.document, 'scroll').pipe(
     map(() => this.viewport.getScrollPosition()?.[1] > 0)
   );
 
   ngOnInit() {
-    this.getMarketTab(enumMarketsList.MAXIMA);
+    this.getMarketTab(this.marketList.MAXIMA);
     this.cartService.getOldProducts();
     this.cdr.detectChanges();
   }
@@ -83,22 +78,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   removeFromCartEmitter(product: Product) {
     const mappedProduct = mapProductToCartProduct(product, this.marketName);
     this.cartService.removeFromCart(mappedProduct);
-  }
-
-  getMarketTab(marketName: string) {
-    return this.firestoreService
-      .getAllMarketProducts(marketName)
-      .pipe(
-        map((products) => {
-          this.products$.next(products);
-          return products.filter((product) => {
-            this.asyncCategories.add(product.category);
-            this.cdr.detectChanges();
-            return product;
-          });
-        })
-      )
-      .subscribe();
   }
 
   onScrollToTop(): void {
@@ -116,6 +95,22 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {}
+
+  private getMarketTab(marketName: string) {
+    return this.firestoreService
+      .getAllMarketProducts(marketName)
+      .pipe(
+        map((products) => {
+          this.products$.next(products);
+          return products.filter((product) => {
+            this.asyncCategories.add(product.category);
+            this.cdr.detectChanges();
+            return product;
+          });
+        })
+      )
+      .subscribe();
+  }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();

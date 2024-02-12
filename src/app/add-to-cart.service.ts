@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { CartProduct, enumMarketsList } from './product.interface';
+import { CartProduct } from './product.interface';
 
 @Injectable({
   providedIn: 'root',
