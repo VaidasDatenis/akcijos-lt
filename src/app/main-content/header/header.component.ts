@@ -17,7 +17,7 @@ import { AddToCartService } from '../../add-to-cart.service';
 })
 export class HeaderComponent {
   cartService = inject(AddToCartService);
-  dialog = inject(MatDialog);
+  private dialog = inject(MatDialog);
   @Input() cartLength = 0;
 
   openCartDialog(): void {

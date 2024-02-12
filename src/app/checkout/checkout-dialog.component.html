@@ -13,10 +13,10 @@
   <div *ngIf="!cartService.cartListSignal().length" class="empty-cart">
     Krėpšelis tuščias!
   </div>
-  <market-list *ngIf="checkForMarketsInList(enumMarketsList.MAXIMA)" [marketName]="enumMarketsList.MAXIMA"></market-list>
-  <market-list *ngIf="checkForMarketsInList(enumMarketsList.IKI)" [marketName]="enumMarketsList.IKI"></market-list>
-  <market-list *ngIf="checkForMarketsInList(enumMarketsList.RIMI)" [marketName]="enumMarketsList.RIMI"></market-list>
-  <market-list *ngIf="checkForMarketsInList(enumMarketsList.LIDL)" [marketName]="enumMarketsList.LIDL"></market-list>
+  <market-list *ngIf="checkForMarketsInList(marketList.MAXIMA)" [marketName]="marketList.MAXIMA"></market-list>
+  <market-list *ngIf="checkForMarketsInList(marketList.IKI)" [marketName]="marketList.IKI"></market-list>
+  <market-list *ngIf="checkForMarketsInList(marketList.RIMI)" [marketName]="marketList.RIMI"></market-list>
+  <market-list *ngIf="checkForMarketsInList(marketList.LIDL)" [marketName]="marketList.LIDL"></market-list>
 </mat-dialog-content>
 <!-- footer -->
 <mat-dialog-actions>
@@ -26,7 +26,7 @@
         mat-fab
         extended
         color="accent"
-        (click)="clearCart()"
+        (click)="cartService.clearCart()"
       >
         <mat-icon class="button-icon" fontIcon="delete"></mat-icon>
         <span class="button-text">Valyti viską</span>
@@ -45,7 +45,7 @@
       <button
         mat-mini-fab
         color="accent"
-        (click)="clearCart()"
+        (click)="cartService.clearCart()"
       >
         <mat-icon class="button-icon" fontIcon="delete"></mat-icon>
       </button>

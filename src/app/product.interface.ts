@@ -25,7 +25,7 @@ export interface CartProduct {
   quantity: number;
 }
 
-export enum enumMarketsList {
+export enum MarketListEnum {
   MAXIMA = 'maxima',
   IKI = 'iki',
   RIMI = 'rimi',
@@ -40,8 +40,8 @@ export interface Market {
 }
 
 export const listOfMarkets: Market[] = [
-  { id: 1, name: 'maxima', label: 'Maxima' },
-  { id: 2, name: 'iki', label: 'IKI' },
-  { id: 3, name: 'rimi', label: 'Rimi' },
-  { id: 4, name: 'lidl', label: 'Lidl' },
+  { id: 1, name: MarketListEnum.MAXIMA, label: 'Maxima' },
+  { id: 2, name: MarketListEnum.IKI, label: 'IKI' },
+  { id: 3, name: MarketListEnum.RIMI, label: 'Rimi' },
+  { id: 4, name: MarketListEnum.LIDL, label: 'Lidl' },
 ];

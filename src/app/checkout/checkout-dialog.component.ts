@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { enumMarketsList } from '../product.interface';
+import { MarketListEnum } from '../product.interface';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,15 +18,11 @@ import { MarketListComponent } from './market-list/market-list.component';
 })
 export class CheckoutDialog {
   cartService = inject(AddToCartService);
-  enumMarketsList = enumMarketsList;
+  marketList = MarketListEnum;
 
   checkForMarketsInList(marketName: string) {
     return this.cartService.cartListSignal().find((product) => {
       return product.market === marketName;
     })
-  }
-
-  clearCart() {
-    this.cartService.clearCart();
   }
 }
