@@ -1,0 +1,34 @@
+<div *ngIf="recipes$">
+  <span class="recipe-title">Apsipirke Maxima - pasigaminkite!</span>
+  <div class="recipe-container">
+    <div class="row">
+      <div class="col">
+        <div class="flex-container">
+          <div class="nav-arrows left-arrow" (click)="scrollLeft()">
+            <mat-icon aria-hidden="false" aria-label="Scroll left" fontIcon="chevron_left"></mat-icon>
+          </div>
+          <div class="scrollable-nav" #scrollableNav>
+            <ul class="nav nav-tabs">
+              <li class="nav-item recipe-tab" *ngFor="let recipe of recipes$ | async" (click)="selectRecipe(recipe)">
+                <img [src]="recipe.imageUrl" alt="{{ recipe.name }}" style="width: 50px; height: 50px;">
+                <div class="recipe-details">
+                  <span class="recipe-name">{{ recipe.name }}</span>
+                  <span class="recipe-name">Kaina: {{ recipe.average_cost | currency: 'EUR': 'symbol' }}</span>
+                </div>
+              </li>
+              <div *ngIf="!recipes$" class="d-flex justify-content-center">
+                <mat-spinner [diameter]="30"></mat-spinner>
+              </div>
+            </ul>
+          </div>
+          <div class="nav-arrows right-arrow" (click)="scrollRight()">
+            <mat-icon aria-hidden="false" aria-label="Scroll right" fontIcon="chevron_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedRecipe" [@detailEnterLeave]>
+    <app-recipe-details [recipe]="selectedRecipe"></app-recipe-details>
+  </div>
+</div>

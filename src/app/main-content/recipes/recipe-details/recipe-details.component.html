@@ -1,0 +1,13 @@
+<div class="recipe-details" *ngIf="recipe; else noRecipeSelected">
+  <div class="recipe-content">
+    <img [src]="recipe.imageUrl" alt="{{ recipe.name }}">
+    <div class="recipe-details">
+      <span class="recipe-title">{{ recipe.name }}</span>
+      <span class="recipe-ingredients"><span class="defalt-font">Ingridientai: </span>{{ addExtraSpaceBetweenListItems(recipe.ingredients) }}.</span>
+      <p class="recipe-process"><span class="defalt-font">Paruošimas: </span>{{ recipe.process }}</p>
+      <span class="defalt-font">Apytiksli kaina: {{ recipe.average_cost | currency: 'EUR': 'symbol' }}</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #noRecipeSelected></ng-template>

@@ -1,0 +1,44 @@
+.recipe-details {
+  display: flex;
+  padding: 1rem;
+  margin: 0 3rem;
+  height: 12.5rem;
+  
+  .recipe-content {
+    display: flex;
+    width: 100%;
+    border: 1.5px solid burlywood;
+    border-radius: 20px;
+
+    img {
+      width: 18.75rem;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .recipe-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .recipe-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .recipe-ingredients {
+        font-style: italic;
+      }
+
+      .recipe-process {
+        font-size: 1rem;
+      }
+    }
+
+  }
+}
+
+.defalt-font {
+  font-style: normal;
+  font-weight: bold;
+}
