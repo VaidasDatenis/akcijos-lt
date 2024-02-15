@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
-import { Market, Product } from './product.interface';
+import { Product } from './product.interface';
 import { Recipe } from './recipe.interface';
 
 @Injectable({

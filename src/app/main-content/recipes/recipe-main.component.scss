@@ -14,14 +14,13 @@
 
   .flex-container {
     display: flex;
-    width: 100%;
     align-items: center;
-    justify-content: center;
   }
 
   .scrollable-nav {
-    flex-grow: 1;
     overflow-x: auto;
+    white-space: nowrap;
+    flex-grow: 1;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -29,7 +28,6 @@
 
     .recipe-tab {
       display: flex;
-      white-space: nowrap;
       width: auto;
       border: 1px solid rgb(109, 189, 236);
       border-radius: 5px;
@@ -79,19 +77,17 @@
     cursor: pointer;
     width: 3.125rem;
     height: 4.125rem;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
   
   .left-arrow {
-    /* Styles for left arrow */
     box-shadow: 10px 0 5px -2px #888;
   }
   
   .right-arrow {
-    /* Styles for right arrow */
     box-shadow: -10px 0 5px -2px #888;
   }
-}
-
-.selected-recipe {
-  
 }

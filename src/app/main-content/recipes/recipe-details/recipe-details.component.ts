@@ -1,4 +1,4 @@
-import { CurrencyPipe, NgFor, NgIf } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Recipe } from "src/app/recipe.interface";
 
@@ -10,7 +10,6 @@ import { Recipe } from "src/app/recipe.interface";
   imports: [
     NgIf,
     NgFor,
-    CurrencyPipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,13 +1,14 @@
-import { AsyncPipe, CurrencyPipe, NgFor, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, inject } from "@angular/core";
+import { AsyncPipe, NgFor, NgIf } from "@angular/common";
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild, effect, inject } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Subject } from "rxjs";
 import { FirebaseService } from "src/app/firebase.service";
-import { Recipe, RecipeEnum } from "src/app/recipe.interface";
+import { Recipe } from "src/app/recipe.interface";
 import { RecipeDetailsComponent } from "./recipe-details/recipe-details.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { trigger, style, transition, animate } from '@angular/animations';
+import { getMarketLabel, loadRecipeFromMarket } from "src/app/utils";
 
 @Component({
   standalone: true,
@@ -18,7 +19,6 @@ import { trigger, style, transition, animate } from '@angular/animations';
     NgFor,
     NgIf,
     AsyncPipe,
-    CurrencyPipe,
     MatTabsModule,
     MatIconModule,
     MatProgressSpinnerModule,
@@ -37,21 +37,28 @@ import { trigger, style, transition, animate } from '@angular/animations';
     ])
   ]
 })
-export class RecipeMainComponent implements OnInit {
-  @ViewChild('scrollableNav') scrollableNav!: ElementRef;
+export class RecipeMainComponent implements AfterViewInit {
+  @ViewChild('scrollableNav', { static: false }) scrollableNav!: ElementRef;
   private firestoreService = inject(FirebaseService);
-  private recipeEnum = RecipeEnum.MAXIMA_RECIPES;
   recipes$ = new Subject<Recipe[]>();
   selectedRecipe: Recipe | null = null;
 
-  ngOnInit() {
-    this.getRecipesByMarket();
+  constructor() {
+    effect(() => {
+      let marketRecipe = loadRecipeFromMarket(this.firestoreService.selectedMarketTab());
+      this.firestoreService.getMarketRecipes(marketRecipe)
+        .subscribe((data) => this.recipes$.next(data))
+    });
   }
 
-  getRecipesByMarket() {
-    this.firestoreService.selectedMarketTab();
-    console.log(this.firestoreService.selectedMarketTab());
-    this.firestoreService.getMarketRecipes(this.recipeEnum).subscribe((data) => this.recipes$.next(data))
+  ngAfterViewInit() {
+    if (this.scrollableNav) {
+      this.scrollableNav.nativeElement.scrollLeft = 0;
+    }
+  }
+
+  getMarketLabel(): string {
+    return getMarketLabel(this.firestoreService.selectedMarketTab());
   }
 
   selectRecipe(recipe: Recipe) {
@@ -63,10 +70,12 @@ export class RecipeMainComponent implements OnInit {
   }
 
   scrollLeft() {
-    this.scrollableNav.nativeElement.scrollLeft -= 100;
+    this.scrollableNav.nativeElement.scrollToPosition -= 3000;
+    // console.log(this.scrollableNav.nativeElement.scrollLeft -= 100);
   }
 
   scrollRight() {
-    this.scrollableNav.nativeElement.scrollLeft -= 100;
+    this.scrollableNav.nativeElement.scrollLeft += 3000;
+    // console.log(this.scrollableNav.nativeElement.scrollLeft += 100);
   }
 }

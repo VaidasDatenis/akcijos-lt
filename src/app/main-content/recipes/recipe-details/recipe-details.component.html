@@ -5,7 +5,7 @@
       <span class="recipe-title">{{ recipe.name }}</span>
       <span class="recipe-ingredients"><span class="defalt-font">Ingridientai: </span>{{ addExtraSpaceBetweenListItems(recipe.ingredients) }}.</span>
       <p class="recipe-process"><span class="defalt-font">Paruošimas: </span>{{ recipe.process }}</p>
-      <span class="defalt-font">Apytiksli kaina: {{ recipe.average_cost | currency: 'EUR': 'symbol' }}</span>
+      <span class="defalt-font">{{ recipe.average_cost }}</span>
     </div>
   </div>
 </div>
