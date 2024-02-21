@@ -18,6 +18,7 @@ import { ScrollComponent } from '../scroll/scroll.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CardComponent } from './card/card.component';
 import { FooterComponent } from '../footer/footer.component';
+import { RecipeMainComponent } from './recipes/recipe-main.component';
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ import { FooterComponent } from '../footer/footer.component';
     AsyncPipe,
     MatTabsModule,
     HeaderComponent,
+    RecipeMainComponent,
     FooterComponent,
     ScrollComponent,
     CardComponent,

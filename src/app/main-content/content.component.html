@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="content">
   <app-scroll *ngIf="showScroll$ | async" (scrollToTop)="onScrollToTop()"></app-scroll>
-  <mat-tab-group (selectedTabChange)="marketTabChanged($event)" [selectedIndex]="0">
+  <app-recipes></app-recipes>
+  <mat-tab-group class="shadow" (selectedTabChange)="marketTabChanged($event)" [selectedIndex]="0">
     <mat-tab *ngFor="let market of marketsList" [label]="market.name">
       <ng-template mat-tab-label>{{ market.label }}</ng-template>
       <ng-template matTabContent>
