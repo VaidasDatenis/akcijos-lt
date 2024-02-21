@@ -14,80 +14,34 @@
 
   .flex-container {
     display: flex;
-    align-items: center;
-  }
 
-  .scrollable-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    flex-grow: 1;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    .recipe-tab {
+    .nav-tabs {
       display: flex;
-      width: auto;
-      border: 1px solid rgb(109, 189, 236);
-      border-radius: 5px;
-      margin: 4px;
-      cursor: pointer;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
 
-      img {
-        width: 50px;
-        height: 50px;
-        margin-right: 24px;
-        border-radius: 5px 0 0 5px;
-      }
+      .recipe-tab {
+        display: flex;
+        flex: 0 0 auto;
+        width: auto;
+        border: 1px solid rgb(109, 189, 236);
+        border-radius: 5px;
+        margin: 4px;
+        cursor: pointer;
 
-      .recipe-details {
-        display: grid;
-        padding-right: 5px;
+        img {
+          width: 50px;
+          height: 50px;
+          margin-right: 24px;
+          border-radius: 5px 0 0 5px;
+        }
+
+        .recipe-details {
+          display: grid;
+          padding-right: 5px;
+        }
       }
     }
-  }
-
-  .scrollable-nav::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .nav-tabs {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    background-color: #fff;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  
-  .nav-tabs::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .nav-item {
-    flex: 0 0 auto;
-  }
-  
-  .nav-arrows {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 3.125rem;
-    height: 4.125rem;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-  
-  .left-arrow {
-    box-shadow: 10px 0 5px -2px #888;
-  }
-  
-  .right-arrow {
-    box-shadow: -10px 0 5px -2px #888;
   }
 }
